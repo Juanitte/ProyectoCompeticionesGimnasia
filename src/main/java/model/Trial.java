@@ -4,15 +4,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 import interfaces.iTrial;
+import model.DTO.Category;
+import model.DTO.Gadget;
+import model.DTO.Type;
 
 public class Trial implements iTrial {
 	private String nombre;
     private Set<Entry> participaciones;
+    private Type tipo;
+    private Category categoria;
+    private Gadget aparato;
+    
+    public Trial() {
+    	this.nombre = "";
+    	this.participaciones = new HashSet<Entry>();
+    }
     
 	public Trial(String nombre, Set<Entry> participaciones) {
 		super();
 		this.nombre = nombre;
-		this.participaciones = new HashSet<Entry>();
+		this.participaciones = participaciones;
 	}
 
 	public String getNombre() {
@@ -31,7 +42,30 @@ public class Trial implements iTrial {
 		this.participaciones = participaciones;
 	}
 	
-	
+	public Type getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Type tipo) {
+		this.tipo = tipo;
+	}
+
+	public Category getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Category categoria) {
+		this.categoria = categoria;
+	}
+
+	public Gadget getAparato() {
+		return aparato;
+	}
+
+	public void setAparato(Gadget aparato) {
+		this.aparato = aparato;
+	}
+
 	public Trial modificarPrueba() {
 		return null;
 	}

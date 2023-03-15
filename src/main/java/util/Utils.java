@@ -93,7 +93,7 @@ public class Utils {
 		            System.out.println("Fecha ingresada: " + fechaIngresada);
 		            valido=true;
 		        } catch (Exception e) {
-		            Utils.showmessage("Formato de fecha inválido. Asegúrese de ingresar la fecha en formato AAAA-MM-DD.");
+		            Utils.showMessage("Formato de fecha inválido. Asegúrese de ingresar la fecha en formato AAAA-MM-DD.");
 		            
 		        }
 		return valido;
@@ -139,7 +139,7 @@ public class Utils {
 	 * @param msg , el mensaje a mostrar.
 	 */
 	
-	public static void showmessage(String msg) {
+	public static void showMessage(String msg) {
 		System.out.println(msg);
 	}
 	

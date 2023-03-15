@@ -1,11 +1,21 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import interfaces.iGroup;
 import model.DTO.Gimnast;
 
 public class Group implements iGroup {
 	private String nombre;
 	private String club;
+	private Set<Gimnast> gimnasts;
+	
+	public Group() {
+		this.nombre = "";
+		this.club = "";
+		this.gimnasts = new HashSet<Gimnast>();
+	}
 	
 	public Group(String nombre, String club) {
 		super();
@@ -27,6 +37,14 @@ public class Group implements iGroup {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	
+	public Set<Gimnast> getGimnasts() {
+		return gimnasts;
+	}
+
+	public void setGimnasts(Set<Gimnast> gimnasts) {
+		this.gimnasts = gimnasts;
 	}
 
 	public boolean gimnastasCompatibles(Gimnast gimnast) {
