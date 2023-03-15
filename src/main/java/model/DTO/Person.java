@@ -7,6 +7,14 @@ public abstract class Person {
 	protected String Name;
 	protected String email;
 	protected String PhoneNumber;
+	
+	public Person() {
+		this.DNI = "";
+		this.Name = "";
+		this.email = "";
+		this.PhoneNumber = "";
+	}
+	
 	public Person(String dNI, String name, String email, String phoneNumber) {
 		super();
 		DNI = dNI;

@@ -8,12 +8,11 @@ import model.DTO.Category;
 import model.DTO.Gimnast;
 import util.Utils;
 
-public class RepoGimnast implements iRepoGimnast {
 	public class RepoGimnast implements iRepoGimnast {
 		private Set<Gimnast> gimnasts;
-		Utils util = new Utils();
+		
 		public RepoGimnast() {
-			this.gimnasts = new HashSet<>();
+			this.gimnasts = new HashSet<Gimnast>();
 		}
 		/**
 		 *  nos dara la variable dni y cuando lo tengamos buscara ese dni y que no existen dos
@@ -59,7 +58,7 @@ public class RepoGimnast implements iRepoGimnast {
 	 */
 
 	public boolean crearGimnasta(String dni, String name, String email, Category category, String club, String phone) {
-		Gimnast nuevo =new Gimnast(dni, name, email, phone, category, club,  phone);
+		Gimnast nuevo =new Gimnast(dni, name, email, phone, category, club);
 		if (gimnasts.add(nuevo)) {
 			return true;
 		}
@@ -77,7 +76,7 @@ public class RepoGimnast implements iRepoGimnast {
 	 * esta funcion nos permite poder modificar una gimnasta ya creado 
 	 * la funcion nos pedira antes el gimnasta buscado para modificar
 	 */
-	public void modificarGimnasta(String dni, String name, String email, Category category, String club,String phone) {
+	public void modificarGimnasta(Gimnast gimnast, String dni, String name, String email, Category category, String club,String phone) {
 		gimnast.setCategory(category);
 		gimnast.setClub(club);
 		gimnast.setDNI(dni);

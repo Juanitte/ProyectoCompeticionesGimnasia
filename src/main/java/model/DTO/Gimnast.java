@@ -1,22 +1,28 @@
 package model.DTO;
 
 public class Gimnast extends Person {
-	private String Category;
+	private Category Category;
 	 private String Club;
+	 
+	 public Gimnast() {
+		 super();
+		 this.Category = null;
+		 this.Club = "";		 
+	 }
 
-	public Gimnast(String dNI, String name, String email, String phoneNumber, String categori, String club) {
-		super(dNI, name, email, phoneNumber);
-		Category = categori;
+	public Gimnast(String dni, String name, String email, String phoneNumber, Category category, String club) {
+		super(dni, name, email, phoneNumber);
+		Category = category;
 		Club = club;
 	}
 	
 
-	public String getCategory() {
+	public Category getCategory() {
 		return Category;
 	}
 
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		Category = category;
 	}
 
