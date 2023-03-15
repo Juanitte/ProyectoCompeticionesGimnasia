@@ -1,23 +1,23 @@
 package model.DTO;
 
 public class Gimnast extends Person {
-	private String Categori;
+	private String Category;
 	 private String Club;
 
 	public Gimnast(String dNI, String name, String email, String phoneNumber, String categori, String club) {
 		super(dNI, name, email, phoneNumber);
-		Categori = categori;
+		Category = categori;
 		Club = club;
 	}
 	
 
-	public String getCategori() {
-		return Categori;
+	public String getCategory() {
+		return Category;
 	}
 
 
-	public void setCategori(String categori) {
-		Categori = categori;
+	public void setCategory(String category) {
+		Category = category;
 	}
 
 
@@ -33,7 +33,7 @@ public class Gimnast extends Person {
 
 	@Override
 	public String toString() {
-		return super.toString()+"Categori=" + Categori + ", Club=" + Club + "]";
+		return super.toString()+"\n\tCategoría: " + Category + "\n\tClub: " + Club;
 	}
 
 }

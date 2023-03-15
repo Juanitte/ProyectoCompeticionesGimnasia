@@ -2,7 +2,7 @@ package model.DTO;
 
 import java.util.Objects;
 
-public class Person {
+public abstract class Person {
 	protected String DNI;
 	protected String Name;
 	protected String email;
@@ -56,7 +56,7 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "Gimnast:[" + DNI + ", Name=" + Name + ", email=" + email + ", PhoneNumber=" + PhoneNumber;
+		return "Gimnasta:\n\tDNI: " + DNI + "\n\tNombre: " + Name + "\n\tEmail: " + email + "\n\tTeléfono: " + PhoneNumber;
 	}
 	
 
