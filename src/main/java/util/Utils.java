@@ -72,7 +72,7 @@ public class Utils {
 	 */
 	public static boolean validaEmail(String email) {
 		boolean valido=false;
-				  if (email.matches("^[a-zA-Z0-9._%+-]+@+.$")) {
+				  if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
 					  valido=true;
 				  }
 				  
