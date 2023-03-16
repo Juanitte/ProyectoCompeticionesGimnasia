@@ -142,17 +142,22 @@ public class Controller implements iController {
 		Competition competition = new Competition();
 		String name = "";
 		String date = "";
+		String description = "";
 	
 		if(!inEnglish) {
 			gui.muestraMenuAgregarCompeticion();
 			do {
 				name = Utils.stringInput("Introduzca el nombre: ");
+				description = Utils.stringInput("Introduzca la descripción: ");
 				do {
 					date = Utils.stringInput("Introduzca la fecha(AAAA-MM-DD): ");
 					if(!Utils.validaFecha(date)) {
 						Utils.showMessage("Formato de fecha incorrecto.");
 					}
 				}while(!Utils.validaFecha(date));
+				competition.setName(name);
+				competition.setDate(date);
+				competition.setDescription(description);
 				if(repoCompetition.competicionDuplicada(competition)) {
 					Utils.showMessage("Esa Competición ya existe.");
 				}
@@ -161,19 +166,22 @@ public class Controller implements iController {
 			gui.muestraMenuAgregarCompeticionEN();
 			do {
 				name = Utils.stringInput("Introduce Name: ");
+				description = Utils.stringInput("Introduce a description: ");
 				do {
 					date = Utils.stringInput("Introduce Date(AAAA-MM-DD): ");
 					if(!Utils.validaFecha(date)) {
 						Utils.showMessage("Incorrect date format.");
 					}
 				}while(!Utils.validaFecha(date));
+				competition.setName(name);
+				competition.setDate(date);
+				competition.setDescription(description);
 				if(repoCompetition.competicionDuplicada(competition)) {
 					Utils.showMessage("This Competition already exists.");
 				}
 			}while(repoCompetition.competicionDuplicada(competition));
 		}
-		//Aquí va el código para añadir una competición a el set de competiciones
-		//del repositorio, pero como no está ni empezado no puedo acceder a él aún.
+		repoCompetition.getCompetitions().add(competition);
 		
 	}
 
@@ -281,8 +289,7 @@ public class Controller implements iController {
 			break;
 			
 		case 3:
-			//Aquí va el código para mostrar todas las pruebas del set de pruebas de la competición.
-			//Aún no está hecho así que queda pendiente.
+			repoCompetition.mostrarCompeticiones();
 			break;
 			
 		case 4:
@@ -290,8 +297,8 @@ public class Controller implements iController {
 			break;
 			
 		case 5:
-			//Aquí va el código para eliminar una competición del set de competiciones.
-			//Aún no está hecho por lo que queda pendiente.
+			ejecutaMenuConfirmacion();
+				repoCompetition.getCompetitions().remove(competition);
 			
 		case 0:
 			
@@ -532,8 +539,8 @@ public class Controller implements iController {
 			break;
 			
 		case 5:
-			//Aquí va el código para eliminar una prueba del set de pruebas de la competición.
-			//Aún no está hecho por lo que queda pendiente.
+			ejecutaMenuConfirmacion();
+			repoCompetition.getCompetitions().getTrials().remove(trial);
 			
 		case 0:
 			
@@ -581,6 +588,7 @@ public class Controller implements iController {
 		}
 		entry.setTime(hora);
 		ejecutaMenuAgregarParticipante(trial, entry);
+		trial.getParticipaciones().add(entry);
 		
 	}
 
@@ -595,10 +603,8 @@ public class Controller implements iController {
 					isCreated = true;
 					Group group = new Group();
 					String nombre = "";
-					String club = "";
 					do {
 						nombre = Utils.stringInput("Introduzca el nombre del grupo: ");
-						nombre = Utils.stringInput("Introduce the group's name: ");
 						if(!repoCompetition.nombreDeGrupoDuplicado(nombre)) {
 							group.setNombre(nombre);
 						}else {
@@ -617,7 +623,6 @@ public class Controller implements iController {
 					isCreated = true;
 					Group group = new Group();
 					String nombre = "";
-					String club = "";
 					do {
 						nombre = Utils.stringInput("Introduce the group's name: ");
 						if(!repoCompetition.nombreDeGrupoDuplicado(nombre)) {
@@ -674,34 +679,131 @@ public class Controller implements iController {
 		
 	}
 
-	public void ejecutaMenuBuscarParticipacion(Trial trial) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void controlaMenuBuscarParticipacion(int option, Trial trial) {
-		// TODO Auto-generated method stub
+	public <T> void ejecutaMenuBuscarParticipacion(Trial trial) {
+		Entry<T> entry = new Entry<T>();
+		do {
+			if(!inEnglish) {
+				gui.muestraMenuBuscarParticipacion();				
+			}else {
+				gui.muestraMenuBuscarParticipacionEN();				
+			}
+			int dorsal = -1;
+			if(!inEnglish) {
+				dorsal = Utils.intInput("Introduzca el dorsal a buscar: ");
+			}else {
+				dorsal = Utils.intInput("Introduce the Entry Number to search for: ");
+			}
+			entry = trial.buscarParticipacion(dorsal);
+			if(entry != null) {
+				Utils.showMessage("");
+				Utils.showMessage(entry.toString());
+				Utils.showMessage("");
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("No se pudo encontrar la participación.");
+				}else {
+					Utils.showMessage("Couldn't find that entry.");
+				}
+			}
+		}while(entry == null);
 		
 	}
 
 	public void ejecutaMenuModificarPrueba(Trial trial) {
-		// TODO Auto-generated method stub
+		String nombre = "";
+		if(!inEnglish) {
+			gui.muestraMenuModificarPrueba();
+			nombre = Utils.stringInput("Introduzca el nuevo nombre: ");
+		}else {
+			gui.muestraMenuModificarPruebaEN();
+			nombre = Utils.stringInput("Introduce the new name: ");
+		}
+		trial.setNombre(nombre);
 		
 	}
 
 	public void ejecutaMenuModificarCompeticion(Competition competition) {
-		// TODO Auto-generated method stub
+		String nombre = "";
+		String fecha = "";
+		String descripcion = "";
+		Competition newCompetition = new Competition();
+		
+		if(!inEnglish) {
+			do {
+				nombre = Utils.stringInput("Introduzca el nuevo nombre: ");
+				descripcion = Utils.stringInput("Introduzca la nueva descripción: ");
+				do {
+					fecha = Utils.stringInput("Introduzca la nueva fecha: ");
+				}while(!Utils.validaFecha(fecha));
+				newCompetition.setName(nombre);
+				newCompetition.setDate(fecha);
+				newCompetition.setDescription(descripcion);
+				if(repoCompetition.competicionDuplicada(newCompetition)) {
+					Utils.showMessage("Ya existe una competición con esos datos.");
+				}else {
+					Utils.showMessage("Competición modificada.");
+				}
+			}while(repoCompetition.competicionDuplicada(newCompetition));
+			competition.setName(nombre);
+			competition.setDate(fecha);
+			competition.setDescription(descripcion);
+		}else {
+			do {
+				nombre = Utils.stringInput("Introduce a new name: ");
+				descripcion = Utils.stringInput("Introduce a new description: ");
+				do {
+					fecha = Utils.stringInput("Introduce a new date: ");
+				}while(!Utils.validaFecha(fecha));
+				newCompetition.setName(nombre);
+				newCompetition.setDate(fecha);
+				newCompetition.setDescription(descripcion);
+				if(repoCompetition.competicionDuplicada(newCompetition)) {
+					Utils.showMessage("This competition already exists.");
+				}else {
+					Utils.showMessage("Competition updated.");
+				}
+			}while(repoCompetition.competicionDuplicada(newCompetition));
+			competition.setName(nombre);
+			competition.setDate(fecha);
+			competition.setDescription(descripcion);
+		}
 		
 	}
 
 	public boolean ejecutaMenuConfirmacion() {
-		// TODO Auto-generated method stub
-		return false;
+		int option = -1;
+		boolean isConfirmed = false;
+			if(!inEnglish) {
+				gui.muestraMenuConfirmacion();
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				gui.muestraMenuConfirmacionEN();
+				option = Utils.intInput("Choose an option: ");
+			}
+		isConfirmed = controlaMenuConfirmacion(option);
+		return isConfirmed;
 	}
 
 	public boolean controlaMenuConfirmacion(int option) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isConfirmed = false;
+		switch(option) {
+		case 1:
+			isConfirmed = true;
+			break;
+		
+		case 2:
+			isConfirmed = false;
+			break;
+		
+		default:
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
+			}
+		}
+		return isConfirmed;
+		
 	}
 
 	public void ejecutaMenuAgregarGimnasta() {
