@@ -20,7 +20,7 @@ import util.Utils;
 		 */
 	public Gimnast buscarGimnastaPorDNI(String dni) {
 		  for (Gimnast gimnast : gimnasts) {
-		        if (gimnast.getDNI().equals(dni)) {
+		        if (gimnast.getDni().equals(dni)) {
 		        	return gimnast;
 		        }
 		    }
@@ -69,7 +69,7 @@ import util.Utils;
 	 */
 	public void mostrarGimnastas() {
 		 for (Gimnast gimnast : gimnasts) {
-			  System.out.println(gimnast);	 
+			  Utils.showMessage(gimnast.toString());	 
 		   }
 	}
 	/**
@@ -79,7 +79,7 @@ import util.Utils;
 	public void modificarGimnasta(Gimnast gimnast, String dni, String name, String email, Category category, String club,String phone) {
 		gimnast.setCategory(category);
 		gimnast.setClub(club);
-		gimnast.setDNI(dni);
+		gimnast.setDni(dni);
 		gimnast.setEmail(email);
 		gimnast.setName(name);
 		gimnast.setPhoneNumber(phone);

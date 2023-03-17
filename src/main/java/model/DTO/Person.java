@@ -3,30 +3,22 @@ package model.DTO;
 import java.util.Objects;
 
 public abstract class Person {
-	protected String DNI;
+	protected String Dni;
 	protected String Name;
-	protected String email;
+	protected String Email;
 	protected String PhoneNumber;
-	
-	public Person() {
-		this.DNI = "";
-		this.Name = "";
-		this.email = "";
-		this.PhoneNumber = "";
-	}
-	
-	public Person(String dNI, String name, String email, String phoneNumber) {
+	public Person(String Dni, String Name, String Email, String PhoneNumber) {
 		super();
-		DNI = dNI;
-		Name = name;
-		this.email = email;
-		PhoneNumber = phoneNumber;
+		Dni = Dni;
+		Name = Name;
+		this.Email = Email;
+		PhoneNumber = PhoneNumber;
 	}
-	public String getDNI() {
-		return DNI;
+	public String getDni() {
+		return Dni;
 	}
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setDni(String dni) {
+		Dni = dni;
 	}
 	public String getName() {
 		return Name;
@@ -35,10 +27,10 @@ public abstract class Person {
 		Name = name;
 	}
 	public String getEmail() {
-		return email;
+		return Email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		Email = email;
 	}
 	public String getPhoneNumber() {
 		return PhoneNumber;
@@ -48,7 +40,7 @@ public abstract class Person {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(DNI, Name, PhoneNumber, email);
+		return Objects.hash(Dni, Email, Name, PhoneNumber);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -59,12 +51,12 @@ public abstract class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		return Objects.equals(DNI, other.DNI) && Objects.equals(Name, other.Name)
-				&& Objects.equals(PhoneNumber, other.PhoneNumber) && Objects.equals(email, other.email);
+		return Objects.equals(Dni, other.Dni) && Objects.equals(Email, other.Email) && Objects.equals(Name, other.Name)
+				&& Objects.equals(PhoneNumber, other.PhoneNumber);
 	}
 	@Override
 	public String toString() {
-		return "Gimnasta:\n\tDNI: " + DNI + "\n\tNombre: " + Name + "\n\tEmail: " + email + "\n\tTeléfono: " + PhoneNumber;
+		return "Gimnasta:\n\tDNI: " + Dni + "\n\tNombre: " + Name + "\n\tEmail: " + Email + "\n\tTeléfono: " + PhoneNumber;
 	}
 	
 

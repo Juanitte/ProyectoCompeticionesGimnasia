@@ -3,23 +3,25 @@ package model.DTO;
 public class Gimnast extends Person {
 	private Category Category;
 	 private String Club;
-	 
-	 public Gimnast() {
-		 super();
-		 this.Category = null;
-		 this.Club = "";		 
-	 }
 
-	public Gimnast(String dni, String name, String email, String phoneNumber, Category category, String club) {
-		super(dni, name, email, phoneNumber);
+	
+
+	public Gimnast(String Dni, String Name, String Email, String PhoneNumber, Category category, String Club) {
+		super(Dni, Name, Email, PhoneNumber);
 		Category = category;
-		Club = club;
+		this.Club = Club;
 	}
 	
+
+
+
 
 	public Category getCategory() {
 		return Category;
 	}
+
+
+
 
 
 	public void setCategory(Category category) {
@@ -27,14 +29,21 @@ public class Gimnast extends Person {
 	}
 
 
+
+
+
 	public String getClub() {
 		return Club;
 	}
 
 
+
+
+
 	public void setClub(String club) {
 		Club = club;
 	}
+
 
 
 	@Override
