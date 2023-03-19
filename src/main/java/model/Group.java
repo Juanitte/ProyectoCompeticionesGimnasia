@@ -81,8 +81,8 @@ public class Group implements iGroup {
 
 	public boolean gimnastasCompatibles(Gimnast gimnast) {
 		 for (Gimnast g : gimnasts) {
-			  if(g.getCategory().equals(gimnast.getCategory())) {
-				  Utils.showMessage("Es de la misma categoría.");
+			  if(g.getCategory() == gimnast.getCategory() && g.getClub().equalsIgnoreCase(gimnast.getClub())) {
+				  return true;
 			  }
 		   }
 		 return false;
