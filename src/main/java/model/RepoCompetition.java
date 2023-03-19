@@ -29,11 +29,6 @@ import java.util.Set;
 			this.competitions = competitions;
 		}
 
-		@Override
-		public String toString() {
-			return "RepoCompetition [competitions=" + competitions + "]";
-		}
-
 
 		public void mostrarCompeticiones() {
 			for(Competition competition : competitions) {

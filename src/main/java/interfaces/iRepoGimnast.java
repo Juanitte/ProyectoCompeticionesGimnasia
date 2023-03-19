@@ -11,7 +11,9 @@ public interface iRepoGimnast {
 	boolean crearGimnasta(String dni, String name, String email, Category category, String club,String phone);
 	void mostrarGimnastas();
 	void modificarGimnasta(Gimnast gimnast, String dni, String name, String email, Category category, String club,String phone);
-	Gimnast eliminarGimnasta(Gimnast gimnast);
+	boolean eliminarGimnasta(Gimnast gimnast);
+	boolean agregarGimnasta(Gimnast gimnast);
+	boolean gimnastaDuplicado(Gimnast gimnast);
 	
 	//Solo el dni tiene que llevar equals() para comprobar que no haya repetido.
 	

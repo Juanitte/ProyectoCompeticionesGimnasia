@@ -3,6 +3,7 @@ package interfaces;
 import model.Competition;
 import model.Entry;
 import model.Trial;
+import model.DTO.Category;
 import model.DTO.Gimnast;
 
 public interface iController {
@@ -20,8 +21,8 @@ public interface iController {
 	void ejecutaMenuAgregarPrueba(Competition competition);
 	void ejecutaMenuAgregarTipo(Trial trial);
 	void controlaMenuAgregarTipo(int option, Trial trial);
-	void ejecutaMenuAgregarCategoria(Trial trial);
-	void controlaMenuAgregarCategoria(int option, Trial trial);
+	Category ejecutaMenuAgregarCategoria();
+	Category controlaMenuAgregarCategoria(int option);
 	void ejecutaMenuAgregarAparato(Trial trial);
 	void controlaMenuAgregarAparato(int option, Trial trial);
 	void ejecutaMenuBuscarPrueba(Competition competition);
@@ -39,10 +40,10 @@ public interface iController {
 	void controlaMenuGestionGimnastas(int option);
 	void ejecutaMenuAgregarGimnasta();
 	Gimnast ejecutaMenuBuscarGimnasta();
-	Gimnast controlaMenuBuscarGimnasta(int option, Gimnast gimnast);
-	void ejecutaMenuAccionesGimnasta();
-	void controlaMenuAccionesGimnasta(int option);
-	void ejecutaMenuModificarGimnasta();
+	Gimnast controlaMenuBuscarGimnasta(int option);
+	void ejecutaMenuAccionesGimnasta(Gimnast gimnast);
+	void controlaMenuAccionesGimnasta(int option, Gimnast gimnast);
+	void ejecutaMenuModificarGimnasta(Gimnast gimnast);
 	void ejecutaMenuIdioma();
 	void controlaMenuIdioma(int option);
 }

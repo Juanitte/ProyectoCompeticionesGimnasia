@@ -69,7 +69,7 @@ import util.Utils;
 	 */
 	public void mostrarGimnastas() {
 		 for (Gimnast gimnast : gimnasts) {
-			  Utils.showMessage(gimnast.toString());	 
+			  Utils.showMessage(gimnast.toString() + "\n\t");	 
 		   }
 	}
 	/**
@@ -88,10 +88,24 @@ import util.Utils;
 	/**
 	 * esta funcion elimnina el Gimnasta que hemos buscado para borrarlo por completo en nuestra base de datos
 	 */
-	public Gimnast eliminarGimnasta(Gimnast gimnast) {
-		  gimnasts.remove(gimnasts); // eliminamos el gimnasta del HashMap
-			return gimnast;
+	public boolean eliminarGimnasta(Gimnast gimnast) {
+		  return gimnasts.remove(gimnast); // eliminamos el gimnasta del HashSet
 		}
+	
+	
+	public boolean agregarGimnasta(Gimnast gimnast) {
+		return this.gimnasts.add(gimnast);
+	}
+	
+	
+	public boolean gimnastaDuplicado(Gimnast gimnast) {
+		for(Gimnast gimnasta : this.gimnasts) {
+			if(gimnasta.getDni().equalsIgnoreCase(gimnast.getDni())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	
