@@ -7,18 +7,21 @@ import interfaces.iRepoGimnast;
 import model.Competition;
 import model.Entry;
 import model.Group;
+import model.RepoCompetition;
+import model.RepoGimnast;
 import model.Trial;
 import model.DTO.Category;
 import model.DTO.Gadget;
 import model.DTO.Gimnast;
 import model.DTO.Type;
 import util.Utils;
+import view.GUI;
 
 public class Controller implements iController {
 
-	private iGUI gui;
-	private iRepoGimnast repoGimnast;
-	private iRepoCompetition repoCompetition;
+	private iGUI gui = new GUI();
+	private iRepoGimnast repoGimnast = new RepoGimnast();
+	private iRepoCompetition repoCompetition = new RepoCompetition();
 	private boolean inEnglish = false;
 	
 
@@ -155,8 +158,8 @@ public class Controller implements iController {
 						Utils.showMessage("Formato de fecha incorrecto.");
 					}
 				}while(!Utils.validaFecha(date));
-				competition.setName(name);
-				competition.setDate(date);
+				competition.setNombre(name);
+				competition.setFecha(date);
 				competition.setDescription(description);
 				if(repoCompetition.competicionDuplicada(competition)) {
 					Utils.showMessage("Esa Competición ya existe.");
@@ -173,15 +176,23 @@ public class Controller implements iController {
 						Utils.showMessage("Incorrect date format.");
 					}
 				}while(!Utils.validaFecha(date));
-				competition.setName(name);
-				competition.setDate(date);
+				competition.setNombre(name);
+				competition.setFecha(date);
 				competition.setDescription(description);
 				if(repoCompetition.competicionDuplicada(competition)) {
 					Utils.showMessage("This Competition already exists.");
 				}
 			}while(repoCompetition.competicionDuplicada(competition));
 		}
-		repoCompetition.getCompetitions().add(competition);
+		if(repoCompetition.agregarCompeticion(competition)){
+			if(!inEnglish) {
+				Utils.showMessage("Competición agregada con éxito.");
+			}else {
+				Utils.showMessage("Competition added succesfully.");
+			}
+		}else {
+			Utils.showMessage("Error.");
+		}
 		
 	}
 
@@ -297,8 +308,9 @@ public class Controller implements iController {
 			break;
 			
 		case 5:
-			ejecutaMenuConfirmacion();
+			if(ejecutaMenuConfirmacion()) {
 				repoCompetition.getCompetitions().remove(competition);
+			}
 			
 		case 0:
 			
@@ -539,8 +551,18 @@ public class Controller implements iController {
 			break;
 			
 		case 5:
-			ejecutaMenuConfirmacion();
-			repoCompetition.getCompetitions().getTrials().remove(trial);
+			if(ejecutaMenuConfirmacion()) {
+				if(competition.getTrials().remove(trial)) {
+					if(!inEnglish) {
+						Utils.showMessage("Prueba eliminada con éxito.");
+					}else {
+						Utils.showMessage("Trial removed succesfully.");
+					}
+				}else {
+					Utils.showMessage("Error.");
+				}
+			}
+			
 			
 		case 0:
 			
@@ -566,12 +588,14 @@ public class Controller implements iController {
 					hora = Utils.stringInput("Introduzca la hora de participación(HH:MM): ");
 					if(!Utils.validaHora(hora)) {
 							Utils.showMessage("El formato de la hora no es correcto(HH:MM).");
+					}else {
+						entry.setTime(hora);
 					}
 				}while(!Utils.validaHora(hora));
-				if(trial.horaDuplicada(hora)) {
+				if(trial.horaDuplicada(entry)) {
 						Utils.showMessage("Ya hay un participante a esa hora.");
 				}
-			}while(trial.horaDuplicada(hora));
+			}while(trial.horaDuplicada(entry));
 		}else {
 			gui.muestraMenuAgregarParticipacionEN();
 			do {
@@ -579,16 +603,25 @@ public class Controller implements iController {
 					hora = Utils.stringInput("Introduce the entry time(HH:MM): ");
 					if(!Utils.validaHora(hora)) {
 							Utils.showMessage("Wrong time format(HH:MM).");
+					}else {
+						entry.setTime(hora);
 					}
 				}while(!Utils.validaHora(hora));
-				if(trial.horaDuplicada(hora)) {
+				if(trial.horaDuplicada(entry)) {
 						Utils.showMessage("There's already an entry at that time.");
 				}
-			}while(trial.horaDuplicada(hora));
+			}while(trial.horaDuplicada(entry));
 		}
-		entry.setTime(hora);
 		ejecutaMenuAgregarParticipante(trial, entry);
-		trial.getParticipaciones().add(entry);
+		if(trial.getParticipaciones().add(entry)) {
+			if(!inEnglish) {
+				Utils.showMessage("Participación agregada con éxito.");
+			}else {
+				Utils.showMessage("Entry added succesfully.");
+			}
+		}else {
+			Utils.showMessage("Error.");
+		}
 		
 	}
 
@@ -605,12 +638,12 @@ public class Controller implements iController {
 					String nombre = "";
 					do {
 						nombre = Utils.stringInput("Introduzca el nombre del grupo: ");
-						if(!repoCompetition.nombreDeGrupoDuplicado(nombre)) {
+						if(!trial.nombreDeGrupoDuplicado(nombre)) {
 							group.setNombre(nombre);
 						}else {
 							Utils.showMessage("El nombre introducido ya existe.");
 						}
-					}while(repoCompetition.nombreDeGrupoDuplicado(nombre));
+					}while(trial.nombreDeGrupoDuplicado(nombre));
 					group.setClub(Utils.stringInput("Introduzca el nombre del club: "));
 					entry.setParticipante((T) group);
 					
@@ -625,12 +658,12 @@ public class Controller implements iController {
 					String nombre = "";
 					do {
 						nombre = Utils.stringInput("Introduce the group's name: ");
-						if(!repoCompetition.nombreDeGrupoDuplicado(nombre)) {
+						if(!trial.nombreDeGrupoDuplicado(nombre)) {
 							group.setNombre(nombre);
 						}else {
 							Utils.showMessage("That name already exists.");
 						}
-					}while(repoCompetition.nombreDeGrupoDuplicado(nombre));
+					}while(trial.nombreDeGrupoDuplicado(nombre));
 					group.setClub(Utils.stringInput("Introduce the club's name: "));
 					entry.setParticipante((T) group);					
 				}
@@ -735,8 +768,8 @@ public class Controller implements iController {
 				do {
 					fecha = Utils.stringInput("Introduzca la nueva fecha: ");
 				}while(!Utils.validaFecha(fecha));
-				newCompetition.setName(nombre);
-				newCompetition.setDate(fecha);
+				newCompetition.setNombre(nombre);
+				newCompetition.setFecha(fecha);
 				newCompetition.setDescription(descripcion);
 				if(repoCompetition.competicionDuplicada(newCompetition)) {
 					Utils.showMessage("Ya existe una competición con esos datos.");
@@ -744,8 +777,8 @@ public class Controller implements iController {
 					Utils.showMessage("Competición modificada.");
 				}
 			}while(repoCompetition.competicionDuplicada(newCompetition));
-			competition.setName(nombre);
-			competition.setDate(fecha);
+			competition.setNombre(nombre);
+			competition.setFecha(fecha);
 			competition.setDescription(descripcion);
 		}else {
 			do {
@@ -754,8 +787,8 @@ public class Controller implements iController {
 				do {
 					fecha = Utils.stringInput("Introduce a new date: ");
 				}while(!Utils.validaFecha(fecha));
-				newCompetition.setName(nombre);
-				newCompetition.setDate(fecha);
+				newCompetition.setNombre(nombre);
+				newCompetition.setFecha(fecha);
 				newCompetition.setDescription(descripcion);
 				if(repoCompetition.competicionDuplicada(newCompetition)) {
 					Utils.showMessage("This competition already exists.");
@@ -763,8 +796,8 @@ public class Controller implements iController {
 					Utils.showMessage("Competition updated.");
 				}
 			}while(repoCompetition.competicionDuplicada(newCompetition));
-			competition.setName(nombre);
-			competition.setDate(fecha);
+			competition.setNombre(nombre);
+			competition.setFecha(fecha);
 			competition.setDescription(descripcion);
 		}
 		

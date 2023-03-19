@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 	public class RepoCompetition implements iRepoCompetition {
-		public Set<Competition> competitions;
+		private Set<Competition> competitions;
 
 		
 		public RepoCompetition() {
@@ -68,6 +68,10 @@ import java.util.Set;
 		        }
 		    }
 		   return null;
+		}
+		
+		public boolean agregarCompeticion(Competition competition) {
+			return this.competitions.add(competition);
 		}
 		
 		

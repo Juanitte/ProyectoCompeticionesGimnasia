@@ -1,10 +1,13 @@
 package interfaces;
 
+import java.util.Set;
+
 import model.Competition;
-import model.Group;
 
 public interface iRepoCompetition {
 
+	Set<Competition> getCompetitions();
+	boolean agregarCompeticion(Competition competition);
 	void mostrarCompeticiones();
 	boolean competicionDuplicada(Competition competition);
 	Competition buscarCompeticionPorNombre(String name);

@@ -30,8 +30,7 @@ public interface iController {
 	<T> void ejecutaMenuAgregarParticipacion(Trial trial);
 	<T> void ejecutaMenuAgregarParticipante(Trial trial, Entry<T> entry);
 	<T> void controlaMenuAgregarParticipante(int option, Trial trial, Entry<T> entry);
-	void ejecutaMenuBuscarParticipacion(Trial trial);
-	void controlaMenuBuscarParticipacion(int option, Trial trial);
+	<T> void ejecutaMenuBuscarParticipacion(Trial trial);
 	void ejecutaMenuModificarPrueba(Trial trial);
 	void ejecutaMenuModificarCompeticion(Competition competition);
 	boolean ejecutaMenuConfirmacion();

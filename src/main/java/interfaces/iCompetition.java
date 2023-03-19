@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.Set;
+
 import model.Group;
 import model.Trial;
 import model.DTO.Category;
@@ -10,6 +12,7 @@ public interface iCompetition {
 	//La clase competición deberá llevar un int que será el nº de dorsal por el que va,
 	//ya que hay que usar un autoincrementador pero individual para cada competición.
 	//Así se podrá llevar una cuenta del dorsal que toca poner al siguiente participante en cada competición.
+	Set<Trial> getTrials();
 	void mostrarPruebas();
 	boolean pruebaDuplicada(Trial trial);
 	boolean agregarPrueba(Trial trial);

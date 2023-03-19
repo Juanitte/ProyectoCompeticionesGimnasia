@@ -145,6 +145,17 @@ public class Trial implements iTrial {
 		}
 		return false;
 	}
+
+	public boolean nombreDeGrupoDuplicado(String name) {
+		if(this.tipo == Type.GRUPO) {
+			for(Entry<Group> entry : this.participaciones) {
+				if(entry.getParticipante().getNombre().equalsIgnoreCase(name)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
     
 	
 }
