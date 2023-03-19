@@ -4,7 +4,11 @@ public class Gimnast extends Person {
 	private Category Category;
 	 private String Club;
 
-	
+	public Gimnast() {
+		super();
+		this.Category = null;
+		this.Club = "";
+	}
 
 	public Gimnast(String Dni, String Name, String Email, String PhoneNumber, Category category, String Club) {
 		super(Dni, Name, Email, PhoneNumber);
@@ -25,7 +29,7 @@ public class Gimnast extends Person {
 
 
 	public void setCategory(Category category) {
-		Category = category;
+		this.Category = category;
 	}
 
 
@@ -41,7 +45,7 @@ public class Gimnast extends Person {
 
 
 	public void setClub(String club) {
-		Club = club;
+		this.Club = club;
 	}
 
 
@@ -51,4 +55,18 @@ public class Gimnast extends Person {
 		return super.toString()+"\n\tCategoría: " + Category + "\n\tClub: " + Club;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((Category == null) ? 0 : Category.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	
 }

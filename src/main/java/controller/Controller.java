@@ -122,22 +122,85 @@ public class Controller implements iController {
 	}
 
 	public void ejecutaMenuGestionGimnastas() {
-		// TODO Auto-generated method stub
+		int option = -1;
+		
+		do {
+			if(!inEnglish) {
+				gui.muestraMenuGimnastas();
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				gui.muestraMenuGimnastasEN();
+				option = Utils.intInput("Choose an option: ");
+			}
+			controlaMenuGestionGimnastas(option);
+		}while(option != 0);
 		
 	}
 
 	public void controlaMenuGestionGimnastas(int option) {
-		// TODO Auto-generated method stub
+		Gimnast gimnast = null;
+		switch(option) {
+		case 1:
+			ejecutaMenuAgregarGimnasta();
+			break;
+			
+		case 2:
+			gimnast = ejecutaMenuBuscarGimnasta();
+			ejecutaMenuAccionesGimnasta(gimnast);
+			break;
+			
+		case 3:
+			repoGimnast.mostrarGimnastas();
+			break;
+			
+		case 0:
+			
+			break;
+			
+		default: 
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
+			}
+		}
 		
 	}
 
 	public void ejecutaMenuIdioma() {
-		// TODO Auto-generated method stub
+		int option = -1;
+		
+		do {
+			if(!inEnglish) {
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				option = Utils.intInput("Choose an option: ");
+			}
+			controlaMenuIdioma(option);
+		}while(option != 0);
 		
 	}
 
 	public void controlaMenuIdioma(int option) {
-		// TODO Auto-generated method stub
+		switch(option) {
+		case 1:
+			this.inEnglish = false;
+			break;
+			
+		case 2:
+			this.inEnglish = true;
+			break;
+			
+		case 0:
+			break;
+			
+		default:
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
+			}
+		}
 		
 	}
 
@@ -339,7 +402,7 @@ public class Controller implements iController {
 				trial.setNombre(Utils.stringInput("Introduce the trial's name: "));
 			}
 			ejecutaMenuAgregarTipo(trial);
-			ejecutaMenuAgregarCategoria(trial);
+			trial.setCategoria(ejecutaMenuAgregarCategoria());
 			ejecutaMenuAgregarAparato(trial);
 			if(competition.pruebaDuplicada(trial)) {
 				if(!inEnglish) {
@@ -390,8 +453,9 @@ public class Controller implements iController {
 		
 	}
 
-	public void ejecutaMenuAgregarCategoria(Trial trial) {
+	public Category ejecutaMenuAgregarCategoria() {
 		int option = -1;
+		Category category = null;
 		do {
 			if(!inEnglish) {
 				gui.muestraMenuAgregarCategoria();
@@ -401,35 +465,30 @@ public class Controller implements iController {
 				option = Utils.intInput("Choose an option: ");			
 			}
 		}while(option != 1 || option != 2);
-		controlaMenuAgregarCategoria(option, trial);
+		category = controlaMenuAgregarCategoria(option);
+		return category;
 		
 	}
 
-	public void controlaMenuAgregarCategoria(int option, Trial trial) {
+	public Category controlaMenuAgregarCategoria(int option) {
 		switch(option) {
 		case 1:
-			trial.setCategoria(Category.PREBENJAMIN);
-			break;
+			return Category.PREBENJAMIN;
 			
 		case 2:
-			trial.setCategoria(Category.BENJAMIN);
-			break;
+			return Category.BENJAMIN;
 			
 		case 3:
-			trial.setCategoria(Category.ALEVIN);
-			break;
+			return Category.ALEVIN;
 			
 		case 4:
-			trial.setCategoria(Category.INFANTIL);
-			break;
+			return Category.INFANTIL;
 			
 		case 5:
-			trial.setCategoria(Category.JUNIOR);
-			break;
+			return Category.JUNIOR;
 			
 		case 6:
-			trial.setCategoria(Category.SENIOR);
-			break;
+			return Category.SENIOR;
 			
 		default: 
 			if(!inEnglish) {
@@ -437,6 +496,7 @@ public class Controller implements iController {
 			}else {
 				Utils.showMessage("Incorrect option.");
 			}
+			return null;
 		}
 		
 	}
@@ -497,7 +557,7 @@ public class Controller implements iController {
 				gui.muestraMenuBuscarPruebaEN();				
 			}
 			ejecutaMenuAgregarTipo(trial);
-			ejecutaMenuAgregarCategoria(trial);
+			trial.setCategoria(ejecutaMenuAgregarCategoria());			
 			ejecutaMenuAgregarAparato(trial);
 			trial = competition.buscarPrueba(trial.getTipo(), trial.getCategoria(), trial.getAparato());
 			if(trial != null) {
@@ -677,26 +737,30 @@ public class Controller implements iController {
 		Gimnast gimnast = null;
 		switch(option) {
 			case 1:
-				gimnast = ejecutaMenuBuscarGimnasta();
-				if(ejecutaMenuConfirmacion()) {
-					if(trial.getTipo() == Type.INDIVIDUAL) {
-						entry.setParticipante((T) gimnast);
-					}else {
-						if(((Group)entry.getParticipante()).getGimnasts().isEmpty()) {
-							((Group)entry.getParticipante()).getGimnasts().add(gimnast);
-						}else {
-							if(((Group)entry.getParticipante()).gimnastasCompatibles(gimnast)) {
-								((Group)entry.getParticipante()).getGimnasts().add(gimnast);
+				do {
+					gimnast = ejecutaMenuBuscarGimnasta();
+					if(gimnast != null) {
+						if(ejecutaMenuConfirmacion()) {
+							if(trial.getTipo() == Type.INDIVIDUAL) {
+								entry.setParticipante((T) gimnast);
 							}else {
-								if(!inEnglish) {
-									Utils.showMessage("Gimnastas incompatibles.");
+								if(((Group)entry.getParticipante()).getGimnasts().isEmpty()) {
+									((Group)entry.getParticipante()).getGimnasts().add(gimnast);
 								}else {
-									Utils.showMessage("Incompatible gimnasts.");
+									if(((Group)entry.getParticipante()).gimnastasCompatibles(gimnast)) {
+										((Group)entry.getParticipante()).getGimnasts().add(gimnast);
+									}else {
+										if(!inEnglish) {
+											Utils.showMessage("Gimnastas incompatibles.");
+										}else {
+											Utils.showMessage("Incompatible gimnasts.");
+										}
+									}
 								}
 							}
 						}
 					}
-				}
+				}while(gimnast == null);
 				break;
 				
 			case 0:
@@ -840,33 +904,339 @@ public class Controller implements iController {
 	}
 
 	public void ejecutaMenuAgregarGimnasta() {
-		// TODO Auto-generated method stub
+		Gimnast gimnast = new Gimnast();
+		String name = "";
+		String dni = "";
+		String email = "";
+		String phoneNumber = "";
+		String club = "";
+	
+		if(!inEnglish) {
+			gui.muestraMenuAgregarGimnasta();
+			do {
+				do {
+					name = Utils.stringInput("Introduzca el nombre: ");
+				}while(!Utils.compruebaNombre(name));
+				do {
+					do {
+						dni = Utils.stringInput("Introduzca el DNI: ");
+						if(!Utils.validaDni(dni)) {
+							Utils.showMessage("Formato de DNI incorrecto.");
+						}
+					}while(!Utils.validaDni(dni));
+					if(!Utils.validaLetraDni(dni)) {
+						Utils.showMessage("Letra de DNI incorrecta.");
+					}
+				}while(!Utils.validaLetraDni(dni));
+				do {
+					email = Utils.stringInput("Introduzca el email: ");
+					if(!Utils.validaEmail(email)) {
+						Utils.showMessage("Email en formato incorrecto.");
+					}
+				}while(!Utils.validaEmail(email));
+				do {
+					phoneNumber = Utils.stringInput("Introduzca el número de teléfono en formato internacional(P.Ej: +34123456789): ");
+					if(!Utils.validaNumeroTelefono(phoneNumber)) {
+						Utils.showMessage("Número de teléfono en formato incorrecto.");
+					}
+				}while(!Utils.validaNumeroTelefono(phoneNumber));
+				club = Utils.stringInput("Introduczca el nombre del club: ");
+				gimnast.setName(name);
+				gimnast.setDni(dni);
+				gimnast.setEmail(email);
+				gimnast.setPhoneNumber(phoneNumber);
+				gimnast.setClub(club);
+				gimnast.setCategory(ejecutaMenuAgregarCategoria());
+				if(repoGimnast.gimnastaDuplicado(gimnast)) {
+					Utils.showMessage("Ese/esa gimnasta ya existe.");
+				}
+			}while(repoGimnast.gimnastaDuplicado(gimnast));
+		}else {
+			gui.muestraMenuAgregarGimnastaEN();
+			do {
+				do {
+					name = Utils.stringInput("Introduce the name: ");
+				}while(!Utils.compruebaNombre(name));
+				do {
+					do {
+						dni = Utils.stringInput("Introduce the DNI: ");
+						if(!Utils.validaDni(dni)) {
+							Utils.showMessage("Incorrect DNI format.");
+						}
+					}while(!Utils.validaDni(dni));
+					if(!Utils.validaLetraDni(dni)) {
+						Utils.showMessage("Incorrect DNI.");
+					}
+				}while(!Utils.validaLetraDni(dni));
+				do {
+					email = Utils.stringInput("Introduce the email: ");
+					if(!Utils.validaEmail(email)) {
+						Utils.showMessage("Incorrect email format.");
+					}
+				}while(!Utils.validaEmail(email));
+				do {
+					phoneNumber = Utils.stringInput("Introduce the international phone number(P.Ej: +34123456789): ");
+					if(!Utils.validaNumeroTelefono(phoneNumber)) {
+						Utils.showMessage("Incorrect phone number format.");
+					}
+				}while(!Utils.validaNumeroTelefono(phoneNumber));
+				club = Utils.stringInput("Introduce the club's name: ");
+				gimnast.setName(name);
+				gimnast.setDni(dni);
+				gimnast.setEmail(email);
+				gimnast.setPhoneNumber(phoneNumber);
+				gimnast.setClub(club);
+				gimnast.setCategory(ejecutaMenuAgregarCategoria());
+				if(repoGimnast.gimnastaDuplicado(gimnast)) {
+					Utils.showMessage("That gimnast already exists.");
+				}
+			}while(repoGimnast.gimnastaDuplicado(gimnast));
+		}
+		if(repoGimnast.agregarGimnasta(gimnast)){
+			if(!inEnglish) {
+				Utils.showMessage("Gimnasta agregado/a con éxito.");
+			}else {
+				Utils.showMessage("Gimnast added succesfully.");
+			}
+		}else {
+			Utils.showMessage("Error.");
+		}
 	}
 
 	public Gimnast ejecutaMenuBuscarGimnasta() {
-		// TODO Auto-generated method stub
-		return null;
+		int option = -1;
+		Gimnast gimnast = null;
+		
+		do {
+			if(!inEnglish) {
+				gui.muestraMenuBuscarGimnasta();
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				gui.muestraMenuBuscarGimnastaEN();
+				option = Utils.intInput("Choose an option: ");
+			}
+			gimnast = controlaMenuBuscarGimnasta(option);
+			if(gimnast == null) {
+				if(!inEnglish) {
+					Utils.showMessage("No se encontró el/la gimnasta.");
+				}else {
+					Utils.showMessage("Couldn't find that gimnast.");
+				}
+			}
+		}while(option < 0 || option > 3 || gimnast == null);
+		return gimnast;
 		
 	}
 
-	public Gimnast controlaMenuBuscarGimnasta(int option, Gimnast gimnast) {
-		// TODO Auto-generated method stub
-		return null;
+	public Gimnast controlaMenuBuscarGimnasta(int option) {
+		Gimnast gimnast = null;
+		switch(option) {
+		case 1:
+			String dni = "";
+			if(!inEnglish) {
+				dni = Utils.stringInput("Introduzca el dni a buscar: ");
+			}else {
+				dni = Utils.stringInput("Introduce the dni to search for: ");
+			}
+			gimnast = repoGimnast.buscarGimnastaPorDNI(dni);
+			if(gimnast != null) {
+				Utils.showMessage("");
+				Utils.showMessage(gimnast.toString());
+				Utils.showMessage("");
+			}
+			return gimnast;
+			
+		case 2:
+			String phone = "";
+			if(!inEnglish) {
+				phone = Utils.stringInput("Introduzca el número de teléfono en formato internacional(+34123456789) a buscar: ");
+			}else {
+				phone = Utils.stringInput("Introduce the international phone number(+34123456789) to search for: ");
+			}
+			gimnast = repoGimnast.buscarGimnastaPorTelefono(phone);
+			if(gimnast != null) {
+				Utils.showMessage("");
+				Utils.showMessage(gimnast.toString());
+				Utils.showMessage("");
+			}
+			return gimnast;
+			
+		case 3:
+			String email = "";
+			if(!inEnglish) {
+				phone = Utils.stringInput("Introduzca el email a buscar: ");
+			}else {
+				phone = Utils.stringInput("Introduce the email to search for: ");
+			}
+			gimnast = repoGimnast.buscarGimnastaPorEmail(email);
+			if(gimnast != null) {
+				Utils.showMessage("");
+				Utils.showMessage(gimnast.toString());
+				Utils.showMessage("");
+			}
+			return gimnast;
+			
+		case 0:
+			
+			return null;
+			
+		default: 
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
+			}
+
+			return null;
+		}
 		
 	}
 
-	public void ejecutaMenuAccionesGimnasta() {
-		// TODO Auto-generated method stub
+	public void ejecutaMenuAccionesGimnasta(Gimnast gimnast) {
+		int option = -1;
+		
+		do {
+			if(!inEnglish) {
+				gui.muestraMenuAccionesGimnasta();
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				gui.muestraMenuAccionesGimnastaEN();
+				option = Utils.intInput("Choose an option: ");
+			}
+			controlaMenuAccionesGimnasta(option, gimnast);
+		}while(option != 0);
 		
 	}
 
-	public void controlaMenuAccionesGimnasta(int option) {
-		// TODO Auto-generated method stub
+	public void controlaMenuAccionesGimnasta(int option, Gimnast gimnast) {
+		switch(option) {
+		case 1:
+			ejecutaMenuModificarGimnasta(gimnast);
+			break;
+			
+		case 2:
+			if(ejecutaMenuConfirmacion()) {
+				if(repoGimnast.eliminarGimnasta(gimnast)){
+					if(!inEnglish) {
+						Utils.showMessage("El/la gimnasta fue borrado/a con éxito.");
+					}else {
+						Utils.showMessage("The gimnast was removed correctly.");
+					}
+				}else {
+					if(!inEnglish) {
+						Utils.showMessage("Hubo un error al borrar el/la gimnasta.");
+					}else {
+						Utils.showMessage("An error ocurred.");
+					}
+				}
+			}
+			break;
+			
+		case 0:
+			
+			break;
+			
+		default: 
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
+			}
+		}
 		
 	}
 
-	public void ejecutaMenuModificarGimnasta() {
-		// TODO Auto-generated method stub
+	public void ejecutaMenuModificarGimnasta(Gimnast gimnast) {
+		Gimnast gimnasta = new Gimnast();
+		String dni = "";
+		String name = "";
+		String email = "";
+		String phone = "";
+		String club = "";
+		Category category = null;
+		if(!inEnglish) {
+			do {
+				do {
+					do {
+						dni = Utils.stringInput("Introduzca el nuevo DNI: ");
+						if(!Utils.validaDni(dni)) {
+							Utils.showMessage("Formato de DNI incorrecto.");
+						}
+					}while(!Utils.validaDni(dni));
+					if(!Utils.validaLetraDni(dni)) {
+						Utils.showMessage("Letra de DNI incorrecta.");
+					}
+				}while(!Utils.validaLetraDni(dni));
+				gimnasta.setDni(dni);
+				do {
+					name = Utils.stringInput("Introduzca el nuevo nombre: ");
+					if(!Utils.compruebaNombre(name)) {
+						Utils.showMessage("Nombre incorrecto");
+					}
+				}while(!Utils.compruebaNombre(name));
+				do {
+					email = Utils.stringInput("Introduzca el nuevo email: ");
+					if(!Utils.validaEmail(email)) {
+						Utils.showMessage("Email en formato incorrecto.");
+					}
+				}while(!Utils.validaEmail(email));
+				do {
+					phone = Utils.stringInput("Introduzca el nuevo número de teléfono en formato internacional(+34123456789): ");
+					if(!Utils.validaNumeroTelefono(phone)) {
+						Utils.showMessage("Número de teléfono en formato incorrecto.");
+					}
+				}while(!Utils.validaNumeroTelefono(phone));
+				club = Utils.stringInput("Introduzca en nuevo nombre de club:");
+				category = ejecutaMenuAgregarCategoria();
+				if(repoGimnast.gimnastaDuplicado(gimnasta)) {
+					Utils.showMessage("Ese/a gimnasta ya existe.");
+				}
+			}while(repoGimnast.gimnastaDuplicado(gimnasta));
+			if(ejecutaMenuConfirmacion()) {
+				repoGimnast.modificarGimnasta(gimnast, dni, name, email, category, club, phone);
+			}
+		}else {
+			do {
+				do {
+					do {
+						dni = Utils.stringInput("Introduce the new DNI: ");
+						if(!Utils.validaDni(dni)) {
+							Utils.showMessage("Icorrect DNI format.");
+						}
+					}while(!Utils.validaDni(dni));
+					if(!Utils.validaLetraDni(dni)) {
+						Utils.showMessage("Incorrect DNI.");
+					}
+				}while(!Utils.validaLetraDni(dni));
+				gimnasta.setDni(dni);
+				do {
+					name = Utils.stringInput("Introduce the new name: ");
+					if(!Utils.compruebaNombre(name)) {
+						Utils.showMessage("Incorrect name.");
+					}
+				}while(!Utils.compruebaNombre(name));
+				do {
+					email = Utils.stringInput("Introduce the new email: ");
+					if(!Utils.validaEmail(email)) {
+						Utils.showMessage("Incorrect email format.");
+					}
+				}while(!Utils.validaEmail(email));
+				do {
+					phone = Utils.stringInput("Introduce the new international phone number(+34123456789): ");
+					if(!Utils.validaNumeroTelefono(phone)) {
+						Utils.showMessage("Incorrect phone number format.");
+					}
+				}while(!Utils.validaNumeroTelefono(phone));
+				club = Utils.stringInput("Introduce the new club's name:");
+				category = ejecutaMenuAgregarCategoria();
+				if(repoGimnast.gimnastaDuplicado(gimnasta)) {
+					Utils.showMessage("That gimnast already exists.");
+				}
+			}while(repoGimnast.gimnastaDuplicado(gimnasta));
+			if(ejecutaMenuConfirmacion()) {
+				repoGimnast.modificarGimnasta(gimnast, dni, name, email, category, club, phone);
+			}
+		}
 		
 	}
 	

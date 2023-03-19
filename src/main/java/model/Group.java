@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import interfaces.iGroup;
@@ -76,7 +77,13 @@ public class Group implements iGroup {
 	}
 
 	public String toString() {
-		return "Group [nombre=" + nombre + ", club=" + club + ", gimnasts=" + gimnasts + "]";
+		Iterator<Gimnast> it = this.gimnasts.iterator();
+		String result = "Grupo: \n\tNombre: " + nombre + "\n\tClub: " + club + "\n\tGimnastas: ";
+		while(it.hasNext()) {
+			result += "\n\t";
+			result += it.next().toString();
+		}
+		return result;
 	}
 
 	public boolean gimnastasCompatibles(Gimnast gimnast) {

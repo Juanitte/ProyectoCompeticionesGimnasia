@@ -1,12 +1,14 @@
 package model;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 
 import interfaces.iCompetition;
 import model.DTO.Category;
 import model.DTO.Gadget;
+import model.DTO.Gimnast;
 import model.DTO.Type;
 import util.Utils;
 
@@ -98,7 +100,13 @@ public class Competition implements iCompetition {
 
 	@Override
 	public String toString() {
-		return "Competición: \n\tNombre: " + nombre + "\n\tDescripción: " + description + "\n\tFecha: " + fecha;
+		Iterator<Trial> it = this.trials.iterator();
+		String result = "Competición: \n\tNombre: " + nombre + "\n\tDescripción: " + description + "\n\tFecha: " + fecha + "\n\tPruebas: ";
+		while(it.hasNext()) {
+			result += "\n\t";
+			result += it.next().toString();
+		}
+		return result;
 	}
 
 

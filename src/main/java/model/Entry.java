@@ -1,8 +1,6 @@
 package model;
 
-import interfaces.iEntry;
-
-public class Entry<T> implements iEntry {
+public class Entry<T>{
 
 	private T participante;
 	private int number;
@@ -97,20 +95,7 @@ public class Entry<T> implements iEntry {
 	
 	@Override
 	public String toString() {
-		return "Entry [participante=" + participante + ", number=" + number + ", time=" + time + ", points=" + points
-				+ "]";
-	}
-
-	/**
-	 * Método que crea un grupo y lo inserta en la participación.
-	 * @param name , el nombre del grupo a crear.
-	 * @param club , el nombre del club del grupo a crear.
-	 * @return el grupo creado.	
-	 */
-	
-	public Group crearGrupo(String name, String club) {
-		
-		return null;
+		return "Participación: \n\tParticipante: " + participante.toString() + "\n\tDorsal: " + number + "\n\tHora: " + time + "\n\tPuntos:" + points;
 	}
 
 }
