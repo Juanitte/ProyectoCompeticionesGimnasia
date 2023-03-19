@@ -67,14 +67,14 @@ public class Trial implements iTrial {
 		this.aparato = aparato;
 	}
 	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aparato == null) ? 0 : aparato.hashCode());
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((participaciones == null) ? 0 : participaciones.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
@@ -92,44 +92,30 @@ public class Trial implements iTrial {
 			return false;
 		if (categoria != other.categoria)
 			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (participaciones == null) {
-			if (other.participaciones != null)
-				return false;
-		} else if (!participaciones.equals(other.participaciones))
-			return false;
 		if (tipo != other.tipo)
 			return false;
 		return true;
 	}
 
 	public String toString() {
-		return "Trial [nombre=" + nombre + ", participaciones=" + participaciones + ", tipo=" + tipo + ", categoria="
-				+ categoria + ", aparato=" + aparato + "]";
-	}
-
-	public Trial modificarPrueba() {
-		
-		return null;
+		return "Prueba:\n\tNombre: " + this.nombre + "\n\tTipo: " + this.tipo.toString() + "\n\tCategoría: "
+				+ this.categoria.toString() + "\n\tAparato:" + this.aparato.toString();
 	}
     
     
-    public Entry buscarParticipacion(int number) {
-		for (Entry entry : participaciones) {
+    public <T> Entry<T> buscarParticipacion(int number) {
+		for (Entry<T> entry : participaciones) {
 			if (entry.getNumber() == number) {
+				Utils.showMessage(entry.toString());
 				return entry;
 			}
 		}
 		return null;
 	}
     
-    public Entry getWinner() {
-		Entry winner = null;
-		for (Entry entry : participaciones) {
+    public <T> Entry<T> getWinner() {
+		Entry<T> winner = null;
+		for (Entry<T> entry : participaciones) {
 			if (winner == null || winner.getPoints() < entry.getPoints()) {
 				winner = entry;
 			}
@@ -137,23 +123,23 @@ public class Trial implements iTrial {
 		return winner;
 	}
     
-    public boolean insertarParticipacion(Entry entry) {
-		if (!horaDuplicada(entry.getTime())) {
+    public <T> boolean insertarParticipacion(Entry<T> entry) {
+		if (!horaDuplicada(entry)) {
 			return participaciones.add(entry);
 		}
 		return false;
 	}
     
-    public void mostrarParticipaciones(Entry entry) {
+    public <T> void mostrarParticipaciones() {
 		Utils.showMessage("Lista de participaciones:");
-		for (Entry participacion : participaciones) {
+		for (Entry<T> participacion : participaciones) {
 			Utils.showMessage(participacion.toString());
 		}
 	}
     
-    public boolean horaDuplicada(Entry participante) {
-		for (Entry e : participaciones) {
-			if (e.getTime().equals(participante.getTime())) {
+    public <T> boolean horaDuplicada(Entry<T> participante) {
+		for (Entry<T> e : participaciones) {
+			if (e.getTime().equalsIgnoreCase(participante.getTime())) {
 				return true;
 			}
 		}
