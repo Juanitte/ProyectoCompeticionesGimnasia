@@ -1,5 +1,6 @@
 package interfaces;
 
+import model.Group;
 import model.Trial;
 import model.DTO.Category;
 import model.DTO.Gadget;
@@ -13,4 +14,6 @@ public interface iCompetition {
 	boolean pruebaDuplicada(Trial trial);
 	boolean agregarPrueba(Trial trial);
 	Trial buscarPrueba(Type type, Category category, Gadget gadget);
+	Group buscarGrupo(String name);
+	boolean nombreDeGrupoDuplicado(String nombre); //Busca en el Set<Entry> de cada elemento del Set<Trial> de cada competicion del Set<Competition> del repositorio, comprobando solo las participaciones de grupos, si hay un nombre igual que el recibido.
 }

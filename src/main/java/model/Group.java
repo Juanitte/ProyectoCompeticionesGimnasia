@@ -48,12 +48,12 @@ public class Group implements iGroup {
 		this.gimnasts = gimnasts;
 	}
 	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((club == null) ? 0 : club.hashCode());
-		result = prime * result + ((gimnasts == null) ? 0 : gimnasts.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
@@ -67,16 +67,6 @@ public class Group implements iGroup {
 		if (getClass() != obj.getClass())
 			return false;
 		Group other = (Group) obj;
-		if (club == null) {
-			if (other.club != null)
-				return false;
-		} else if (!club.equals(other.club))
-			return false;
-		if (gimnasts == null) {
-			if (other.gimnasts != null)
-				return false;
-		} else if (!gimnasts.equals(other.gimnasts))
-			return false;
 		if (nombre == null) {
 			if (other.nombre != null)
 				return false;
