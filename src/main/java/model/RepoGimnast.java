@@ -19,9 +19,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 	public class RepoGimnast implements iRepoGimnast, Serializable {
 		private Set<Gimnast> gimnasts;
 		
-		public RepoGimnast() {
+		private static RepoGimnast _newInstance;
+		
+		private RepoGimnast() {
 			this.gimnasts = new HashSet<Gimnast>();
 		}
+		
+		public static RepoGimnast getInstance() {
+			if(_newInstance==null) {
+				_newInstance = new RepoGimnast();
+			}
+			return _newInstance;
+		}
+		
 		/**
 		 *  nos dara la variable dni y cuando lo tengamos buscara ese dni y que no existen dos
 			  return gimnast que hemos buscado

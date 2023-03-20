@@ -21,14 +21,18 @@ import view.GUI;
 public class Controller implements iController {
 
 	private iGUI gui = new GUI();
-	private iRepoGimnast repoGimnast = new RepoGimnast();
-	private iRepoCompetition repoCompetition = new RepoCompetition();
+	private iRepoGimnast repoGimnast = RepoGimnast.getInstance();
+	private iRepoCompetition repoCompetition = RepoCompetition.getInstance();
 	private boolean inEnglish = false;
 	
 
 	public void start() {
 		try {
 			repoCompetition = XMLManager.readXMLC("Competiciones.xml");
+		}catch(Exception e) {
+			
+		}
+		try {
 			repoGimnast = XMLManager.readXMLG("Gimnastas.xml");
 		}catch(Exception e) {
 			
@@ -66,6 +70,32 @@ public class Controller implements iController {
 			break;
 			
 		case 0:
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
+			if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando gimnastas...");
+				}else {
+					Utils.showMessage("Saving gimnasts...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar los/las gimnastas.");
+				}else {
+					Utils.showMessage("An error ocurred while saving gimnasts.");
+				}
+			}
 			if(!inEnglish) {
 				Utils.showMessage("");
 				Utils.showMessage("Cerrando App...");
@@ -179,7 +209,9 @@ public class Controller implements iController {
 			
 		case 2:
 			gimnast = ejecutaMenuBuscarGimnasta();
-			ejecutaMenuAccionesGimnasta(gimnast);
+			if(gimnast != null) {
+				ejecutaMenuAccionesGimnasta(gimnast);
+			}
 			break;
 			
 		case 3:
@@ -502,7 +534,7 @@ public class Controller implements iController {
 				gui.muestraMenuAgregarTipoEN();
 				option = Utils.intInput("Choose an option: ");			
 			}
-		}while(option != 1 || option != 2);
+		}while(option != 1 && option != 2);
 		controlaMenuAgregarTipo(option, trial);
 	}
 
@@ -537,7 +569,7 @@ public class Controller implements iController {
 				gui.muestraMenuAgregarCategoriaEN();
 				option = Utils.intInput("Choose an option: ");			
 			}
-		}while(option != 1 || option != 2);
+		}while(option <= 0 || option >= 7);
 		category = controlaMenuAgregarCategoria(option);
 		return category;
 		
@@ -584,7 +616,7 @@ public class Controller implements iController {
 				gui.muestraMenuAgregarAparatoEN();
 				option = Utils.intInput("Choose an option: ");			
 			}
-		}while(option != 1 || option != 2);
+		}while(option <= 0 || option >= 6);
 		controlaMenuAgregarAparato(option, trial);
 		
 	}
@@ -1128,14 +1160,14 @@ public class Controller implements iController {
 				option = Utils.intInput("Choose an option: ");
 			}
 			gimnast = controlaMenuBuscarGimnasta(option);
-			if(gimnast == null) {
+			if(option != 0 && gimnast == null) {
 				if(!inEnglish) {
 					Utils.showMessage("No se encontró el/la gimnasta.");
 				}else {
 					Utils.showMessage("Couldn't find that gimnast.");
 				}
 			}
-		}while(option < 0 || option > 3 || gimnast == null);
+		}while(option < 0 || option > 3);
 		return gimnast;
 		
 	}
@@ -1285,6 +1317,7 @@ public class Controller implements iController {
 	}
 
 	public void ejecutaMenuModificarGimnasta(Gimnast gimnast) {
+		boolean isDuplicated = false;
 		Gimnast gimnasta = new Gimnast();
 		String dni = "";
 		String name = "";
@@ -1326,10 +1359,17 @@ public class Controller implements iController {
 				}while(!Utils.validaNumeroTelefono(phone));
 				club = Utils.stringInput("Introduzca en nuevo nombre de club:");
 				category = ejecutaMenuAgregarCategoria();
-				if(repoGimnast.gimnastaDuplicado(gimnasta)) {
-					Utils.showMessage("Ese/a gimnasta ya existe.");
+				if(!gimnast.getDni().equalsIgnoreCase(dni)) {
+					if(repoGimnast.gimnastaDuplicado(gimnasta)) {
+						Utils.showMessage("Ese/a gimnasta ya existe.");
+						isDuplicated = true;
+					}else {
+						isDuplicated = false;
+					}
+				}else {
+					isDuplicated = false;
 				}
-			}while(repoGimnast.gimnastaDuplicado(gimnasta));
+			}while(isDuplicated);
 			if(ejecutaMenuConfirmacion()) {
 				repoGimnast.modificarGimnasta(gimnast, dni, name, email, category, club, phone);
 			}

@@ -19,13 +19,17 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 	public class RepoCompetition implements iRepoCompetition, Serializable {
 		private Set<Competition> competitions;
 
+		private static RepoCompetition _newInstance;
 		
-		public RepoCompetition() {
+		private RepoCompetition() {
 			this.competitions = new HashSet<Competition>();
 		}
-		public RepoCompetition(Set<Competition> competitions) {
-			super();
-			this.competitions = competitions;
+		
+		public static RepoCompetition getInstance() {
+			if(_newInstance==null) {
+				_newInstance = new RepoCompetition();
+			}
+			return _newInstance;
 		}
 		
 
