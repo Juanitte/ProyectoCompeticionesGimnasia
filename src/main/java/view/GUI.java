@@ -212,6 +212,8 @@ public class GUI implements iGUI {
 		Utils.showMessage("||---------------------------------------||");
 		Utils.showMessage("||       5 - Eliminar Prueba             ||");
 		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       6 - Menú Puntuaciones           ||");
+		Utils.showMessage("||---------------------------------------||");
 		Utils.showMessage("||       0 - Salir                       ||");
 		Utils.showMessage("+=========================================+");
 		Utils.showMessage("");
@@ -407,6 +409,22 @@ public class GUI implements iGUI {
 		
 	}
 	
+	public void muestraMenuPuntos() {
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            Menú Puntuación            ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Puntuar                     ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Ver Ganador                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Salir                       ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
+	}
+	
 	
 	
 
@@ -521,6 +539,11 @@ public class GUI implements iGUI {
 	}
 
 	public void muestraMenuIdiomaEN() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void muestraMenuPuntosEN() {
 		// TODO Auto-generated method stub
 		
 	}

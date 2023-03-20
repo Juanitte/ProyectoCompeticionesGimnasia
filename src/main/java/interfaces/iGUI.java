@@ -24,6 +24,7 @@ public interface iGUI {
 	void muestraMenuAccionesGimnasta();			//Este es el menú de acciones de gimnasta. Tiene  opciones: 1 - Modificar Gimnasta. 2 - Eliminar Gimnasta. 0 - Salir.
 	void muestraMenuModificarGimnasta();		//Este es el menú de modificar gimnasta. Contiene información sobre los campos a rellenar(DNI - Nombre - Email - Teléfono - Categoría - Club).
 	void muestraMenuIdioma();					//Este es el menú de idiomas. Tiene 3 opciones: 1 - Español. 2 - Inglés. 0 - Salir.
+	void muestraMenuPuntos();					//Este es el menú de puntuaciones. Tiene 3 opciones: 1 - Puntuar. 2 - Ver Ganador. 0 - Salir.
 	
 	// A partir de aquí se encarga Javi, que son los mismos menús pero en inglés.
 	
@@ -49,4 +50,5 @@ public interface iGUI {
 	void muestraMenuAccionesGimnastaEN();		//Este es el menú de acciones de gimnasta. Tiene  opciones: 1 - Modificar Gimnasta. 2 - Eliminar Gimnasta. 0 - Salir.
 	void muestraMenuModificarGimnastaEN();		//Este es el menú de modificar gimnasta. Contiene información sobre los campos a rellenar(DNI - Nombre - Email - Teléfono - Categoría - Club).
 	void muestraMenuIdiomaEN();					//Este es el menú de idiomas. Tiene 3 opciones: 1 - Español. 2 - Inglés. 0 - Salir.
+	void muestraMenuPuntosEN();					//Este es el menú de puntuaciones. Tiene 3 opciones: 1 - Puntuar. 2 - Ver Ganador. 0 - Salir.
 }
