@@ -355,6 +355,7 @@ public class Controller implements iController {
 				Utils.showMessage("");
 				Utils.showMessage(competition.toString());
 				Utils.showMessage("");
+				Entry.setAutoCode(competition.getSiguienteDorsal());
 				ejecutaMenuAccionesCompeticion(competition);
 			}else {
 				if(!inEnglish) {
@@ -415,6 +416,8 @@ public class Controller implements iController {
 			}
 			isDeleted = controlaMenuAccionesCompeticion(option, competition);
 		}while(option != 0 && !isDeleted);
+		competition.setSiguienteDorsal(Entry.getAutoCode());
+		Entry.setAutoCode(0);
 		
 	}
 
@@ -775,6 +778,9 @@ public class Controller implements iController {
 				}
 			}
 			return isDeleted;
+			
+		case 6:
+			ejecutaMenuPuntos(trial);
 			
 		case 0:
 			
@@ -1372,6 +1378,87 @@ public class Controller implements iController {
 			}while(repoGimnast.gimnastaDuplicado(gimnasta));
 			if(ejecutaMenuConfirmacion()) {
 				repoGimnast.modificarGimnasta(gimnast, dni, name, email, category, club, phone);
+			}
+		}
+		
+	}
+
+	public void ejecutaMenuPuntos(Trial trial) {
+		int option = -1;
+		do {
+			if(!inEnglish) {
+				gui.muestraMenuPuntos();
+				option = Utils.intInput("Seleccione una opción: ");
+			}else {
+				gui.muestraMenuPuntosEN();
+				option = Utils.intInput("Choose an option: ");
+			}
+			controlaMenuPuntos(option, trial);
+		}while(option != 0);
+		
+	}
+
+	public <T> void controlaMenuPuntos(int option, Trial trial) {
+		switch(option) {
+		
+		case 1:
+			int dorsal = -1;
+			int points = 0;
+			if(!inEnglish) {
+				dorsal = Utils.intInput("Introduzca el dorsal a buscar: ");
+			}else {
+				dorsal = Utils.intInput("Introduce the number to search for: ");
+			}
+			
+			Entry<T> entry = trial.buscarParticipacion(dorsal);
+			if(entry != null) {
+				if(!inEnglish) {
+					points = Utils.intInput("Introduce la puntuación: ");
+				}else {
+					points = Utils.intInput("Introduce the score: ");
+				}
+				entry.setPoints(points);
+				if(!inEnglish) {
+					Utils.showMessage("Puntuación añadida.");
+				}else {
+					Utils.showMessage("Score updated.");
+				}
+				if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+					if(!inEnglish) {
+						Utils.showMessage("Guardando competiciones...");
+					}else {
+						Utils.showMessage("Saving competitions...");
+					}
+				}else {
+					if(!inEnglish) {
+						Utils.showMessage("Error al guardar las competiciones.");
+					}else {
+						Utils.showMessage("An error ocurred while saving competitions.");
+					}
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.intInput("No se encontró el dorsal.");
+				}else {
+					Utils.intInput("Couldn't find that number.");
+				}
+			}
+			break;
+			
+		case 2:
+			Utils.showMessage("");
+			Utils.showMessage(trial.getWinner().toString());
+			Utils.showMessage("");
+			break;
+			
+		case 0:
+			break;
+			
+		default:
+			if(!inEnglish) {
+				Utils.showMessage("Opción Incorrecta.");
+			}else {
+				Utils.showMessage("Incorrect option.");
 			}
 		}
 		

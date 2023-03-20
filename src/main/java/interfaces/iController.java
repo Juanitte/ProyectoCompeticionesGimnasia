@@ -45,4 +45,6 @@ public interface iController {
 	void ejecutaMenuModificarGimnasta(Gimnast gimnast);
 	void ejecutaMenuIdioma();
 	void controlaMenuIdioma(int option);
+	void ejecutaMenuPuntos(Trial trial);
+	<T> void controlaMenuPuntos(int option, Trial trial);
 }

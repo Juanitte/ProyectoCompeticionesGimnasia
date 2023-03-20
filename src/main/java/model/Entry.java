@@ -14,6 +14,8 @@ import model.DTO.Gimnast;
 @XmlSeeAlso({Gimnast.class, Group.class})
 public class Entry<T> implements Serializable{
 
+	private static int autoCode = 0;
+	
 	private T participante;
 	private int number;
 	private String time;
@@ -21,7 +23,7 @@ public class Entry<T> implements Serializable{
 	
 	public Entry() {
 		this.participante = null;
-		this.number = -1;
+		this.number = ++autoCode;
 		this.time = "";
 		this.points = 0;
 	}
@@ -31,6 +33,14 @@ public class Entry<T> implements Serializable{
 		this.number = number;
 		this.time = time;
 		this.points = points;
+	}
+	
+	public static int getAutoCode() {
+		return Entry.autoCode;
+	}
+	
+	public static void setAutoCode(int autoCode) {
+		Entry.autoCode = autoCode;
 	}
 
 	public T getParticipante() {
@@ -107,7 +117,7 @@ public class Entry<T> implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Participación: \n\tParticipante: " + participante.toString() + "\n\tDorsal: " + number + "\n\tHora: " + time + "\n\tPuntos:" + points;
+		return "Participación: \n\n\tParticipante: " + participante.toString() + "\n\n\tDorsal: " + number + "\n\tHora: " + time + "\n\tPuntos:" + points + "\n";
 	}
 
 }
