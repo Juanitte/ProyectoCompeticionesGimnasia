@@ -1,14 +1,21 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import interfaces.iGroup;
 import model.DTO.Gimnast;
 import util.Utils;
 
-public class Group implements iGroup {
+@XmlRootElement(name="Grupo")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Group implements iGroup, Serializable {
 	private String nombre;
 	private String club;
 	private Set<Gimnast> gimnasts;

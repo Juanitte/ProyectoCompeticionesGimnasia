@@ -1,18 +1,25 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import interfaces.iCompetition;
 import model.DTO.Category;
 import model.DTO.Gadget;
-import model.DTO.Gimnast;
 import model.DTO.Type;
 import util.Utils;
 
-public class Competition implements iCompetition {
+@XmlRootElement(name="Competicion")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Trial.class})
+public class Competition implements iCompetition, Serializable {
 	private String nombre;
 	private String description;
 	private String fecha;

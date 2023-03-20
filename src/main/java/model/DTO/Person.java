@@ -1,8 +1,15 @@
 package model.DTO;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Person {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Persona")
+@XmlAccessorType(XmlAccessType.FIELD)
+public abstract class Person implements Serializable {
 	protected String Dni;
 	protected String Name;
 	protected String Email;

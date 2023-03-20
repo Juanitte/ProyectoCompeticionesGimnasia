@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +10,13 @@ import model.DTO.Category;
 import model.DTO.Gimnast;
 import util.Utils;
 
-	public class RepoGimnast implements iRepoGimnast {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Gimnastas")
+@XmlAccessorType(XmlAccessType.FIELD)
+	public class RepoGimnast implements iRepoGimnast, Serializable {
 		private Set<Gimnast> gimnasts;
 		
 		public RepoGimnast() {

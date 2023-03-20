@@ -1,7 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import interfaces.iTrial;
 import model.DTO.Category;
@@ -9,7 +15,10 @@ import model.DTO.Gadget;
 import model.DTO.Type;
 import util.Utils;
 
-public class Trial implements iTrial {
+@XmlRootElement(name="Prueba")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Entry.class})
+public class Trial implements iTrial, Serializable {
 	private String nombre;
     private Set<Entry> participaciones;
     private Type tipo;
