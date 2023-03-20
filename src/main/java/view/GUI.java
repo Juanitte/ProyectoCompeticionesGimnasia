@@ -52,6 +52,8 @@ public class GUI implements iGUI {
 		Utils.showMessage("||-------------------------------------- ||");
 		Utils.showMessage("||              - Nombre -               ||");
 		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||            - Descripción -            ||");
+		Utils.showMessage("||---------------------------------------||");
 		Utils.showMessage("||              - Fecha -                ||");
 		Utils.showMessage("+=========================================+");
 		Utils.showMessage("");

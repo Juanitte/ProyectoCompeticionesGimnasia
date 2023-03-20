@@ -1,7 +1,8 @@
 package model;
 
 import interfaces.iRepoCompetition;
-
+import model.DTO.Gimnast;
+import model.DTO.Type;
 import util.Utils;
 
 import java.io.Serializable;
@@ -80,6 +81,26 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 		
 		public boolean agregarCompeticion(Competition competition) {
 			return this.competitions.add(competition);
+		}
+
+		public <T> boolean gimnastaParticipando(Gimnast gimnast) {
+			for(Competition c : this.competitions) {
+				for(Trial t : c.getTrials()) {
+					for(Entry<T> entry : t.getParticipaciones())
+						if(t.getTipo() == Type.INDIVIDUAL) {
+							if(((Gimnast)entry.getParticipante()).equals(gimnast)) {
+								return true;
+							}
+						}else {
+							for(Gimnast g : ((Group)entry.getParticipante()).getGimnasts()) {
+								if(g.equals(gimnast)) {
+									return true;
+								}
+							}
+						}
+				}
+			}
+			return false;
 		}
 		
 		

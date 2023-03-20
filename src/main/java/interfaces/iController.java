@@ -17,7 +17,7 @@ public interface iController {
 	void ejecutaMenuBuscarCompeticion();
 	void controlaMenuBuscarCompeticion(int option);
 	void ejecutaMenuAccionesCompeticion(Competition competition);
-	void controlaMenuAccionesCompeticion(int option, Competition competition);
+	boolean controlaMenuAccionesCompeticion(int option, Competition competition);
 	void ejecutaMenuAgregarPrueba(Competition competition);
 	void ejecutaMenuAgregarTipo(Trial trial);
 	void controlaMenuAgregarTipo(int option, Trial trial);
@@ -27,7 +27,7 @@ public interface iController {
 	void controlaMenuAgregarAparato(int option, Trial trial);
 	void ejecutaMenuBuscarPrueba(Competition competition);
 	void ejecutaMenuAccionesPrueba(Trial trial, Competition competition);
-	void controlaMenuAccionesPrueba(int option, Trial trial, Competition competition);
+	boolean controlaMenuAccionesPrueba(int option, Trial trial, Competition competition);
 	<T> void ejecutaMenuAgregarParticipacion(Trial trial);
 	<T> void ejecutaMenuAgregarParticipante(Trial trial, Entry<T> entry);
 	<T> void controlaMenuAgregarParticipante(int option, Trial trial, Entry<T> entry);
@@ -41,7 +41,7 @@ public interface iController {
 	void ejecutaMenuAgregarGimnasta();
 	Gimnast ejecutaMenuBuscarGimnasta();
 	void ejecutaMenuAccionesGimnasta(Gimnast gimnast);
-	void controlaMenuAccionesGimnasta(int option, Gimnast gimnast);
+	boolean controlaMenuAccionesGimnasta(int option, Gimnast gimnast);
 	void ejecutaMenuModificarGimnasta(Gimnast gimnast);
 	void ejecutaMenuIdioma();
 	void controlaMenuIdioma(int option);

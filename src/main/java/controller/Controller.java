@@ -403,6 +403,7 @@ public class Controller implements iController {
 
 	public void ejecutaMenuAccionesCompeticion(Competition competition) {
 		int option = -1;
+		boolean isDeleted = false;
 		
 		do {
 			if(!inEnglish) {
@@ -412,12 +413,13 @@ public class Controller implements iController {
 				gui.muestraMenuAccionesCompeticionEN();
 				option = Utils.intInput("Choose an option: ");
 			}
-			controlaMenuAccionesCompeticion(option, competition);
-		}while(option != 0);
+			isDeleted = controlaMenuAccionesCompeticion(option, competition);
+		}while(option != 0 && !isDeleted);
 		
 	}
 
-	public void controlaMenuAccionesCompeticion(int option, Competition competition) {
+	public boolean controlaMenuAccionesCompeticion(int option, Competition competition) {
+		boolean isDeleted = false;
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarPrueba(competition);
@@ -435,15 +437,15 @@ public class Controller implements iController {
 				}
 			}
 			
-			break;
+			return false;
 			
 		case 2:
 			ejecutaMenuBuscarPrueba(competition);
-			break;
+			return false;
 			
 		case 3:
 			repoCompetition.mostrarCompeticiones();
-			break;
+			return false;
 			
 		case 4:
 			ejecutaMenuModificarCompeticion(competition);
@@ -460,11 +462,12 @@ public class Controller implements iController {
 					Utils.showMessage("An error ocurred while saving competitions.");
 				}
 			}
-			break;
+			return false;
 			
 		case 5:
 			if(ejecutaMenuConfirmacion()) {
 				repoCompetition.getCompetitions().remove(competition);
+				isDeleted = true;
 				if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
 					if(!inEnglish) {
 						Utils.showMessage("Guardando competiciones...");
@@ -479,10 +482,11 @@ public class Controller implements iController {
 					}
 				}
 			}
+			return isDeleted;
 			
 		case 0:
 			
-			break;
+			return false;
 			
 		default: 
 			if(!inEnglish) {
@@ -490,6 +494,7 @@ public class Controller implements iController {
 			}else {
 				Utils.showMessage("Incorrect option.");
 			}
+			return false;
 		}
 		
 	}
@@ -683,6 +688,7 @@ public class Controller implements iController {
 
 	public void ejecutaMenuAccionesPrueba(Trial trial, Competition competition) {
 		int option = -1;
+		boolean isDeleted = false;
 		
 		do {
 			if(!inEnglish) {
@@ -692,12 +698,13 @@ public class Controller implements iController {
 				gui.muestraMenuAccionesPruebaEN();
 				option = Utils.intInput("Choose an option: ");
 			}
-			controlaMenuAccionesPrueba(option, trial, competition);
-		}while(option != 0);
+			isDeleted = controlaMenuAccionesPrueba(option, trial, competition);
+		}while(option != 0 && !isDeleted);
 		
 	}
 
-	public void controlaMenuAccionesPrueba(int option, Trial trial, Competition competition) {
+	public boolean controlaMenuAccionesPrueba(int option, Trial trial, Competition competition) {
+		boolean isDeleted = false;
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarParticipacion(trial);
@@ -714,15 +721,15 @@ public class Controller implements iController {
 					Utils.showMessage("An error ocurred while saving competitions.");
 				}
 			}
-			break;
+			return false;
 			
 		case 2:
 			ejecutaMenuBuscarParticipacion(trial);
-			break;
+			return false;
 			
 		case 3:
 			trial.mostrarParticipaciones();
-			break;
+			return false;
 			
 		case 4:
 			ejecutaMenuModificarPrueba(trial);
@@ -739,11 +746,12 @@ public class Controller implements iController {
 					Utils.showMessage("An error ocurred while saving competitions.");
 				}
 			}
-			break;
+			return false;
 			
 		case 5:
 			if(ejecutaMenuConfirmacion()) {
 				if(competition.getTrials().remove(trial)) {
+					isDeleted = true;
 					if(!inEnglish) {
 						Utils.showMessage("Prueba eliminada con éxito.");
 					}else {
@@ -766,11 +774,11 @@ public class Controller implements iController {
 					Utils.showMessage("Error.");
 				}
 			}
-			
+			return isDeleted;
 			
 		case 0:
 			
-			break;
+			return false;
 			
 		default: 
 			if(!inEnglish) {
@@ -778,6 +786,7 @@ public class Controller implements iController {
 			}else {
 				Utils.showMessage("Incorrect option.");
 			}
+			return false;
 		}
 		
 	}
@@ -1176,6 +1185,7 @@ public class Controller implements iController {
 
 	public void ejecutaMenuAccionesGimnasta(Gimnast gimnast) {
 		int option = -1;
+		boolean isDeleted = false;
 		
 		do {
 			if(!inEnglish) {
@@ -1185,12 +1195,13 @@ public class Controller implements iController {
 				gui.muestraMenuAccionesGimnastaEN();
 				option = Utils.intInput("Choose an option: ");
 			}
-			controlaMenuAccionesGimnasta(option, gimnast);
-		}while(option != 0);
+			isDeleted = controlaMenuAccionesGimnasta(option, gimnast);
+		}while(option != 0 && !isDeleted);
 		
 	}
 
-	public void controlaMenuAccionesGimnasta(int option, Gimnast gimnast) {
+	public boolean controlaMenuAccionesGimnasta(int option, Gimnast gimnast) {
+		boolean isDeleted = false;
 		switch(option) {
 		case 1:
 			ejecutaMenuModificarGimnasta(gimnast);
@@ -1207,42 +1218,51 @@ public class Controller implements iController {
 					Utils.showMessage("An error ocurred while saving gimnasts.");
 				}
 			}
-			break;
+			return false;
 			
 		case 2:
 			if(ejecutaMenuConfirmacion()) {
-				if(repoGimnast.eliminarGimnasta(gimnast)){
-					if(!inEnglish) {
-						Utils.showMessage("El/la gimnasta fue borrado/a con éxito.");
-					}else {
-						Utils.showMessage("The gimnast was removed correctly.");
-					}
-					if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+				if(!repoCompetition.gimnastaParticipando(gimnast)) {
+					if(repoGimnast.eliminarGimnasta(gimnast)){
+						isDeleted = true;
 						if(!inEnglish) {
-							Utils.showMessage("Guardando gimnastas...");
+							Utils.showMessage("El/la gimnasta fue borrado/a con éxito.");
 						}else {
-							Utils.showMessage("Saving gimnasts...");
+							Utils.showMessage("The gimnast was removed correctly.");
+						}
+						if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+							if(!inEnglish) {
+								Utils.showMessage("Guardando gimnastas...");
+							}else {
+								Utils.showMessage("Saving gimnasts...");
+							}
+						}else {
+							if(!inEnglish) {
+								Utils.showMessage("Error al guardar los/las gimnastas.");
+							}else {
+								Utils.showMessage("An error ocurred while saving gimnasts.");
+							}
 						}
 					}else {
 						if(!inEnglish) {
-							Utils.showMessage("Error al guardar los/las gimnastas.");
+							Utils.showMessage("Hubo un error al borrar el/la gimnasta.");
 						}else {
-							Utils.showMessage("An error ocurred while saving gimnasts.");
+							Utils.showMessage("An error ocurred.");
 						}
 					}
 				}else {
 					if(!inEnglish) {
-						Utils.showMessage("Hubo un error al borrar el/la gimnasta.");
+						Utils.showMessage("No se pudo borrar. El/la gimnasta está participando en alguna competición.");
 					}else {
-						Utils.showMessage("An error ocurred.");
+						Utils.showMessage("Couldn't remove. That gimnast is related to a competition.");
 					}
 				}
 			}
-			break;
+			return isDeleted;
 			
 		case 0:
 			
-			break;
+			return false;
 			
 		default: 
 			if(!inEnglish) {
@@ -1250,6 +1270,7 @@ public class Controller implements iController {
 			}else {
 				Utils.showMessage("Incorrect option.");
 			}
+			return false;
 		}
 		
 	}
