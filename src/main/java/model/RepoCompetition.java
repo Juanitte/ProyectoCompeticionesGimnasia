@@ -4,10 +4,19 @@ import interfaces.iRepoCompetition;
 
 import util.Utils;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-	public class RepoCompetition implements iRepoCompetition {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
+@XmlRootElement(name="Competiciones")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Competition.class})
+	public class RepoCompetition implements iRepoCompetition, Serializable {
 		private Set<Competition> competitions;
 
 		

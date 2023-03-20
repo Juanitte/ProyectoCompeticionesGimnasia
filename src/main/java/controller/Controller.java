@@ -15,6 +15,7 @@ import model.DTO.Gadget;
 import model.DTO.Gimnast;
 import model.DTO.Type;
 import util.Utils;
+import util.XMLManager;
 import view.GUI;
 
 public class Controller implements iController {
@@ -26,6 +27,12 @@ public class Controller implements iController {
 	
 
 	public void start() {
+		try {
+			repoCompetition = XMLManager.readXMLC("Competiciones.xml");
+			repoGimnast = XMLManager.readXMLG("Gimnastas.xml");
+		}catch(Exception e) {
+			
+		}
 		ejecutaMenuPrincipal();		
 	}
 
@@ -97,6 +104,19 @@ public class Controller implements iController {
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarCompeticion();
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
 			break;
 			
 		case 2:
@@ -142,6 +162,19 @@ public class Controller implements iController {
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarGimnasta();
+			if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando gimnastas...");
+				}else {
+					Utils.showMessage("Saving gimnasts...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar los/las gimnastas.");
+				}else {
+					Utils.showMessage("An error ocurred while saving gimnasts.");
+				}
+			}
 			break;
 			
 		case 2:
@@ -356,6 +389,20 @@ public class Controller implements iController {
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarPrueba(competition);
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
+			
 			break;
 			
 		case 2:
@@ -368,11 +415,37 @@ public class Controller implements iController {
 			
 		case 4:
 			ejecutaMenuModificarCompeticion(competition);
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
 			break;
 			
 		case 5:
 			if(ejecutaMenuConfirmacion()) {
 				repoCompetition.getCompetitions().remove(competition);
+				if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+					if(!inEnglish) {
+						Utils.showMessage("Guardando competiciones...");
+					}else {
+						Utils.showMessage("Saving competitions...");
+					}
+				}else {
+					if(!inEnglish) {
+						Utils.showMessage("Error al guardar las competiciones.");
+					}else {
+						Utils.showMessage("An error ocurred while saving competitions.");
+					}
+				}
 			}
 			
 		case 0:
@@ -596,6 +669,19 @@ public class Controller implements iController {
 		switch(option) {
 		case 1:
 			ejecutaMenuAgregarParticipacion(trial);
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
 			break;
 			
 		case 2:
@@ -608,6 +694,19 @@ public class Controller implements iController {
 			
 		case 4:
 			ejecutaMenuModificarPrueba(trial);
+			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando competiciones...");
+				}else {
+					Utils.showMessage("Saving competitions...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar las competiciones.");
+				}else {
+					Utils.showMessage("An error ocurred while saving competitions.");
+				}
+			}
 			break;
 			
 		case 5:
@@ -617,6 +716,19 @@ public class Controller implements iController {
 						Utils.showMessage("Prueba eliminada con éxito.");
 					}else {
 						Utils.showMessage("Trial removed succesfully.");
+					}
+					if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+						if(!inEnglish) {
+							Utils.showMessage("Guardando competiciones...");
+						}else {
+							Utils.showMessage("Saving competitions...");
+						}
+					}else {
+						if(!inEnglish) {
+							Utils.showMessage("Error al guardar las competiciones.");
+						}else {
+							Utils.showMessage("An error ocurred while saving competitions.");
+						}
 					}
 				}else {
 					Utils.showMessage("Error.");
@@ -1112,6 +1224,19 @@ public class Controller implements iController {
 		switch(option) {
 		case 1:
 			ejecutaMenuModificarGimnasta(gimnast);
+			if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+				if(!inEnglish) {
+					Utils.showMessage("Guardando gimnastas...");
+				}else {
+					Utils.showMessage("Saving gimnasts...");
+				}
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("Error al guardar los/las gimnastas.");
+				}else {
+					Utils.showMessage("An error ocurred while saving gimnasts.");
+				}
+			}
 			break;
 			
 		case 2:
@@ -1121,6 +1246,19 @@ public class Controller implements iController {
 						Utils.showMessage("El/la gimnasta fue borrado/a con éxito.");
 					}else {
 						Utils.showMessage("The gimnast was removed correctly.");
+					}
+					if(XMLManager.writeXML(repoGimnast, "Gimnastas.xml")) {
+						if(!inEnglish) {
+							Utils.showMessage("Guardando gimnastas...");
+						}else {
+							Utils.showMessage("Saving gimnasts...");
+						}
+					}else {
+						if(!inEnglish) {
+							Utils.showMessage("Error al guardar los/las gimnastas.");
+						}else {
+							Utils.showMessage("An error ocurred while saving gimnasts.");
+						}
 					}
 				}else {
 					if(!inEnglish) {

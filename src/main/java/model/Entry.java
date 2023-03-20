@@ -1,6 +1,18 @@
 package model;
 
-public class Entry<T>{
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
+import model.DTO.Gimnast;
+
+@XmlRootElement(name="Participacion")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Gimnast.class, Group.class})
+public class Entry<T> implements Serializable{
 
 	private T participante;
 	private int number;
