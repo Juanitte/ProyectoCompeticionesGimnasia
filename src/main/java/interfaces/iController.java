@@ -40,7 +40,6 @@ public interface iController {
 	void controlaMenuGestionGimnastas(int option);
 	void ejecutaMenuAgregarGimnasta();
 	Gimnast ejecutaMenuBuscarGimnasta();
-	Gimnast controlaMenuBuscarGimnasta(int option);
 	void ejecutaMenuAccionesGimnasta(Gimnast gimnast);
 	void controlaMenuAccionesGimnasta(int option, Gimnast gimnast);
 	void ejecutaMenuModificarGimnasta(Gimnast gimnast);

@@ -908,6 +908,14 @@ public class Controller implements iController {
 				break;
 				
 			case 0:
+				if(trial.getTipo() == Type.INDIVIDUAL) {
+					if(!inEnglish) {
+						Utils.showMessage("Debes elegir un/a gimnasta.");
+					}else {
+						Utils.showMessage("Select a gimnast.");
+					}
+					controlaMenuAgregarParticipante(option, trial, entry);
+				}
 				break;
 				
 			default:
@@ -1148,91 +1156,21 @@ public class Controller implements iController {
 	}
 
 	public Gimnast ejecutaMenuBuscarGimnasta() {
-		int option = -1;
 		Gimnast gimnast = null;
 		
-		do {
-			if(!inEnglish) {
-				gui.muestraMenuBuscarGimnasta();
-				option = Utils.intInput("Seleccione una opción: ");
-			}else {
-				gui.muestraMenuBuscarGimnastaEN();
-				option = Utils.intInput("Choose an option: ");
-			}
-			gimnast = controlaMenuBuscarGimnasta(option);
-			if(option != 0 && gimnast == null) {
-				if(!inEnglish) {
-					Utils.showMessage("No se encontró el/la gimnasta.");
-				}else {
-					Utils.showMessage("Couldn't find that gimnast.");
-				}
-			}
-		}while(option < 0 || option > 3);
-		return gimnast;
-		
-	}
-
-	public Gimnast controlaMenuBuscarGimnasta(int option) {
-		Gimnast gimnast = null;
-		switch(option) {
-		case 1:
-			String dni = "";
-			if(!inEnglish) {
-				dni = Utils.stringInput("Introduzca el dni a buscar: ");
-			}else {
-				dni = Utils.stringInput("Introduce the dni to search for: ");
-			}
-			gimnast = repoGimnast.buscarGimnastaPorDNI(dni);
-			if(gimnast != null) {
-				Utils.showMessage("");
-				Utils.showMessage(gimnast.toString());
-				Utils.showMessage("");
-			}
-			return gimnast;
-			
-		case 2:
-			String phone = "";
-			if(!inEnglish) {
-				phone = Utils.stringInput("Introduzca el número de teléfono en formato internacional(+34123456789) a buscar: ");
-			}else {
-				phone = Utils.stringInput("Introduce the international phone number(+34123456789) to search for: ");
-			}
-			gimnast = repoGimnast.buscarGimnastaPorTelefono(phone);
-			if(gimnast != null) {
-				Utils.showMessage("");
-				Utils.showMessage(gimnast.toString());
-				Utils.showMessage("");
-			}
-			return gimnast;
-			
-		case 3:
-			String email = "";
-			if(!inEnglish) {
-				phone = Utils.stringInput("Introduzca el email a buscar: ");
-			}else {
-				phone = Utils.stringInput("Introduce the email to search for: ");
-			}
-			gimnast = repoGimnast.buscarGimnastaPorEmail(email);
-			if(gimnast != null) {
-				Utils.showMessage("");
-				Utils.showMessage(gimnast.toString());
-				Utils.showMessage("");
-			}
-			return gimnast;
-			
-		case 0:
-			
-			return null;
-			
-		default: 
-			if(!inEnglish) {
-				Utils.showMessage("Opción Incorrecta.");
-			}else {
-				Utils.showMessage("Incorrect option.");
-			}
-
-			return null;
+		String dni = "";
+		if(!inEnglish) {
+			dni = Utils.stringInput("Introduzca el dni a buscar: ");
+		}else {
+			dni = Utils.stringInput("Introduce the dni to search for: ");
 		}
+		gimnast = repoGimnast.buscarGimnastaPorDNI(dni);
+		if(gimnast != null) {
+			Utils.showMessage("");
+			Utils.showMessage(gimnast.toString());
+			Utils.showMessage("");
+		}
+		return gimnast;
 		
 	}
 
