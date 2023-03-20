@@ -44,7 +44,7 @@ public class XMLManager {
 	}
 	
 	public static iRepoCompetition readXMLC(String fichero) {
-		iRepoCompetition result = new RepoCompetition();
+		iRepoCompetition result = RepoCompetition.getInstance();
 		
 		JAXBContext context = null;
 		try {
@@ -61,7 +61,7 @@ public class XMLManager {
 	}
 	
 	public static iRepoGimnast readXMLG(String fichero) {
-		iRepoGimnast result = new RepoGimnast();
+		iRepoGimnast result = RepoGimnast.getInstance();
 		
 		JAXBContext context = null;
 		try {
