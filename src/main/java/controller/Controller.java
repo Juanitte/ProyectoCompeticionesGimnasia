@@ -237,8 +237,10 @@ public class Controller implements iController {
 		
 		do {
 			if(!inEnglish) {
+				gui.muestraMenuIdioma();
 				option = Utils.intInput("Seleccione una opción: ");
 			}else {
+				gui.muestraMenuIdiomaEN();
 				option = Utils.intInput("Choose an option: ");
 			}
 			controlaMenuIdioma(option);
@@ -1467,5 +1469,7 @@ public class Controller implements iController {
 	
 }
 	
+
+
 
 

@@ -428,138 +428,426 @@ public class GUI implements iGUI {
 	
 	
 
-	//A partir de aquí es la traducción al inglés y se encarga Javi, has terminado.
+	//Versión en Inglés.
 	
 	
-	
-
 	public void muestraMenuPrincipalEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||               Main Menu               ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Competition Management      ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Gimnast Manager             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Language                    ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - End                         ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuCompeticionesEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||           Competition Menu            ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Add Competition             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Search Competition          ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Show Competitions           ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarCompeticionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            Add Competition            ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||              - Name -                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||           - Description -             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||              - Date -                 ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuBuscarCompeticionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||           Filter Competition          ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Filter by Name              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Filter by Date              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAccionesCompeticionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||         	Competition Actions         ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Add trial                   ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Filter trials               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Show Trials                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       4 - Modify Competition          ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       5 - Delete Competition          ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarPruebaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||               Add Trial               ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||               - Name -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Type -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||              - Category -             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Gadget -              ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarTipoEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||              Choose Type              ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Individual                  ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Group                       ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarCategoriaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||             Choose Category           ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Prebenjamin                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Benjamin                    ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Juvenile                    ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       4 - Youth                       ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       5 - Junior                      ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       6 - Senior                      ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarAparatoEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            Choose Gadget              ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Mace                        ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Ring                        ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Ribbon                      ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       4 - Rope                        ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       5 - Free Hands                  ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuBuscarPruebaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||             Filter Trials             ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||               - Type -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||             - Category -              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||              - Gadget -               ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAccionesPruebaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            Trial Actions              ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Add Entry                   ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Filter Entry                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Show Entries                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       4 - Modify Trial                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       5 - Delete Trial                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       6 - Score Menu                  ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarParticipacionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||               Add Entry               ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||                - Hour -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||            - Participant/s -          ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarParticipanteEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            Add participant            ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Add Participant             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuBuscarParticipacionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||             Search Entry              ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Filter by number            ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Filter by hour              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuModificarPruebaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||              Modify Trial             ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||               - Name -                ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuModificarCompeticionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||           Modify Competition          ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||               - Name -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Date -                ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuConfirmacionEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||            ¿Are you sure?             ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Yes                         ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - No                          ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuGimnastasEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||           Gestión Gimnastas           ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Add Gimnast                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Filter Gimnasts             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       3 - Show Gimnasts               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAgregarGimnastaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||              Add Gimnast              ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||                - DNI -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Name -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Email -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Phone -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||              - Category -             ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||                - Club -               ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuAccionesGimnastaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||           Gimnast Actions             ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Modify Gimnast              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Delete Gimnast              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuModificarGimnastaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||             Modify Gimnast            ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||                - DNI -                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||                - Name -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Email -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Phone -               ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||             - Category -              ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||               - Club -                ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
 
 	public void muestraMenuIdiomaEN() {
-		// TODO Auto-generated method stub
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||             Language Menu             ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Spanish                     ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - English                     ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 		
 	}
-
+	
 	public void muestraMenuPuntosEN() {
-		// TODO Auto-generated method stub
-		
+		Utils.showMessage("");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||              Score Menu               ||");
+		Utils.showMessage("||                                       ||");
+		Utils.showMessage("||-------------------------------------- ||");
+		Utils.showMessage("||       1 - Give a Score                ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       2 - Show Winner                 ||");
+		Utils.showMessage("||---------------------------------------||");
+		Utils.showMessage("||       0 - Back                        ||");
+		Utils.showMessage("+=========================================+");
+		Utils.showMessage("");
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
