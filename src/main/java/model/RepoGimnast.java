@@ -32,6 +32,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 			return _newInstance;
 		}
 		
+		
+		
+		public Set<Gimnast> getGimnasts() {
+			return gimnasts;
+		}
+
+		public void setGimnasts(Set<Gimnast> gimnasts) {
+			this.gimnasts = gimnasts;
+		}
+
 		/**
 		 *  nos dara la variable dni y cuando lo tengamos buscara ese dni y que no existen dos
 			  return gimnast que hemos buscado
