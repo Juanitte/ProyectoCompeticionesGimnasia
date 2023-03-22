@@ -445,7 +445,15 @@ public class Controller implements iController {
 			return false;
 			
 		case 2:
-			ejecutaMenuBuscarPrueba(competition);
+			if(!competition.getTrials().isEmpty()) {
+				ejecutaMenuBuscarPrueba(competition);
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("No hay pruebas en esta competición.");
+				}else {
+					Utils.showMessage("There aren't trials in this competition.");
+				}
+			}
 			return false;
 			
 		case 3:
@@ -664,8 +672,9 @@ public class Controller implements iController {
 	}
 
 	public void ejecutaMenuBuscarPrueba(Competition competition) {
-		Trial trial = new Trial();
+		Trial trial = null;
 		do {
+			trial = new Trial();
 			if(!inEnglish) {
 				gui.muestraMenuBuscarPrueba();				
 			}else {
