@@ -371,9 +371,9 @@ public class Controller implements iController {
 		case 2:
 			String date = "";
 			if(!inEnglish) {
-				name = Utils.stringInput("Introduzca la fecha a buscar(AAAA-MM-DD): ");
+				date = Utils.stringInput("Introduzca la fecha a buscar(AAAA-MM-DD): ");
 			}else {
-				name = Utils.stringInput("Introduce the date to search for(YYYY-MM-DD): ");
+				date = Utils.stringInput("Introduce the date to search for(YYYY-MM-DD): ");
 			}
 			competition = repoCompetition.buscarCompeticionPorFecha(date);
 			if(competition != null) {
@@ -712,18 +712,26 @@ public class Controller implements iController {
 		boolean isDeleted = false;
 		switch(option) {
 		case 1:
-			ejecutaMenuAgregarParticipacion(trial);
-			if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
-				if(!inEnglish) {
-					Utils.showMessage("Guardando competiciones...");
+			if(!repoGimnast.getGimnasts().isEmpty()) {
+				ejecutaMenuAgregarParticipacion(trial);
+				if(XMLManager.writeXML(repoCompetition, "Competiciones.xml")) {
+					if(!inEnglish) {
+						Utils.showMessage("Guardando competiciones...");
+					}else {
+						Utils.showMessage("Saving competitions...");
+					}
 				}else {
-					Utils.showMessage("Saving competitions...");
+					if(!inEnglish) {
+						Utils.showMessage("Error al guardar las competiciones.");
+					}else {
+						Utils.showMessage("An error ocurred while saving competitions.");
+					}
 				}
 			}else {
 				if(!inEnglish) {
-					Utils.showMessage("Error al guardar las competiciones.");
+					Utils.showMessage("No hay gimnastas guardados.");
 				}else {
-					Utils.showMessage("An error ocurred while saving competitions.");
+					Utils.showMessage("There're no gimnasts saved.");
 				}
 			}
 			return false;
@@ -782,7 +790,15 @@ public class Controller implements iController {
 			return isDeleted;
 			
 		case 6:
-			ejecutaMenuPuntos(trial);
+			if(!trial.getParticipaciones().isEmpty()) {
+				ejecutaMenuPuntos(trial);
+			}else {
+				if(!inEnglish) {
+					Utils.showMessage("No hay participaciones en esta prueba.");
+				}else {
+					Utils.showMessage("There aren't entries in this trial.");
+				}
+			}
 			
 		case 0:
 			
@@ -1405,7 +1421,7 @@ public class Controller implements iController {
 		
 		case 1:
 			int dorsal = -1;
-			int points = 0;
+			double points = 0;
 			if(!inEnglish) {
 				dorsal = Utils.intInput("Introduzca el dorsal a buscar: ");
 			}else {
@@ -1415,9 +1431,9 @@ public class Controller implements iController {
 			Entry<T> entry = trial.buscarParticipacion(dorsal);
 			if(entry != null) {
 				if(!inEnglish) {
-					points = Utils.intInput("Introduce la puntuación: ");
+					points = Utils.doubleInput("Introduce la puntuación: ");
 				}else {
-					points = Utils.intInput("Introduce the score: ");
+					points = Utils.doubleInput("Introduce the score: ");
 				}
 				entry.setPoints(points);
 				if(!inEnglish) {
@@ -1468,6 +1484,3 @@ public class Controller implements iController {
 	
 	
 }
-	
-
-

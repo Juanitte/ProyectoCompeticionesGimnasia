@@ -1,10 +1,13 @@
 package interfaces;
 
+import java.util.Set;
+
 import model.DTO.Category;
 import model.DTO.Gimnast;
 
 public interface iRepoGimnast {
 
+	Set<Gimnast> getGimnasts();
 	Gimnast buscarGimnastaPorDNI(String dni);
 	Gimnast buscarGimnastaPorTelefono(String phone);
 	Gimnast buscarGimnastaPorEmail(String email);
